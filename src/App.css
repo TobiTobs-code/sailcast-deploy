@@ -182,3 +182,94 @@
     border-right-color: var(--border);
   }
 }
+
+/* Custom styles for the safety status box */
+.safety-status-card{
+    border: 1.3px solid var(--safety-color); 
+    border-radius: 14px;
+    padding: 14px 16px;
+    background-color: var(--safety-background); 
+    max-width: 300px;
+    width: fit-content;
+    font-family: "sans-serif", Arial, Helvetica;
+    margin: 10px 0;
+    box-sizing: border-box;
+
+   
+  }
+
+  .wrapper {
+    width: 250px;
+  }
+
+  .st-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  .st-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: var(--safety-color);
+
+    flex-shrink: 0;
+    
+  }
+
+  .st-message {
+    font-size: 10px;
+    line-height: 1.4;
+    margin: 0;
+    
+  }
+
+  .st-title {
+      font-size: 13px;
+      font-weight: bold;
+      margin: 0px;
+      color: var(--label-colour);
+      letter-spacing: 0.02em;
+  }
+
+  .st-word {
+
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--label-colour);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-left: 4px;
+    border: 2px solid var(--label-colour);
+    padding: 1px 8px;
+    border-radius: 20px;
+  
+    
+  }
+
+  /* Weather status specific styles */
+  .safety-status-card.safe-status{
+    --safety-color: #5cb85c;
+    --safety-background: rgba(92, 184, 92, 0.08);
+    --label-colour: #3a7a3a;
+   
+  }
+
+  .safety-status-card.caution-status{
+    --safety-color: #e6a817;
+    --safety-background: rgba(230, 165, 23, 0.08);
+    --label-colour: #c3861c;
+  
+  }
+
+  .safety-status-card.unsafe-status{
+    --safety-color: #d9534f;
+    --safety-background: rgba(217, 83, 79, 0.08);
+    --label-colour: #a94442;
+   
+  }
+
