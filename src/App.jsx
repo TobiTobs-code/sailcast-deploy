@@ -76,6 +76,7 @@ function App() {
           windspeed={windspeed}
           gustspeed={gustspeed}
           visibility={visibility}
+          tidalHeight={tidalHeight}
         />
       )}
 

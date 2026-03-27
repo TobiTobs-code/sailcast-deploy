@@ -10,9 +10,12 @@ import React from 'react';
  * Visibility (km):
  */
 
-function getSafetyStatus({windspeed, gustspeed, visibility}) {
+function getSafetyStatus({windspeed, gustspeed, visibility, tidalHeight}) {
     let weatherscore = 0;
 
+    if(tidalHeight == null) {
+        return 'NotCoastal'; //Return NotCoastal if any of the parameters are null
+    }
     //Wind speed(knots) scoring
     if(windspeed <= 15) { //safe
         weatherscore += 1;
@@ -41,6 +44,16 @@ function getSafetyStatus({windspeed, gustspeed, visibility}) {
     if(visibility >= 5) { //safe
         weatherscore += 1;
     } else if(visibility >= 1) { //caution
+        weatherscore += 0;
+    }
+    else { //unsafe
+        weatherscore -= 1;
+    }
+
+    //tidal height scoring
+    if(tidalHeight <= 0.5) { //safe
+        weatherscore += 1;
+    } else if(tidalHeight > 0.5 && tidalHeight <= 1.5) { //caution
         weatherscore += 0;
     }
     else { //unsafe
@@ -95,7 +108,17 @@ function getSafetyStatus({windspeed, gustspeed, visibility}) {
             dot: "#d9534f",
             backgroundcolor: 'rgba(217, 83, 79, 0.08)',
             className: 'unsafe-status',
-    }
+    },
+    NotCoastal : {
+        label : 'Not Coastal',
+        message:
+        "Safety status is only available for coastal locations. Suggestion: Try searching for a coastal location such as a UK harbour or marina to get safety status information.",
+        bordercolor : "#6c757d",
+        labelcolor : "#5a6268",
+        dot: "#6c757d",
+        backgroundcolor: 'rgba(99, 105, 109, 0.08)',
+        className: 'notcoastal-status',
+     }
 }
 
 // The main component that renders the safety status card on the screen. It takes the weather information 
