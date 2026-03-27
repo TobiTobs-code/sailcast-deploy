@@ -13,7 +13,7 @@ import React from 'react';
 function getSafetyStatus({windspeed, gustspeed, visibility, tidalHeight}) {
     let weatherscore = 0;
 
-    if(tidalHeight == null) {
+    if(tidalHeight === null) {
         return 'NotCoastal'; //Return NotCoastal if any of the parameters are null
     }
     //Wind speed(knots) scoring
