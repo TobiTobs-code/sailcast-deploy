@@ -22,10 +22,17 @@ body {
   gap: 20px;
 }
 
+.graphArea {
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 .forecast-graph {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 20px;
 }
 
 .forecast-week {
@@ -65,8 +72,10 @@ body {
 }
 
 .searchBar button:hover {
-  background-color: #58a68b;
+  background-color: #f0ece4;
+  color: #2d7a74;
 }
+
 .left-panel {
   flex: 1;
   display: flex;
@@ -119,7 +128,7 @@ body {
 .safety-status-card {
   max-width: 320px;
   border-radius: 20px;
-  padding: 18px;
+  padding: 15px;
   border: 2px solid #4caf50;
   background: #dfeee2;
 }
@@ -137,6 +146,11 @@ body {
 .unsafe-status {
   border-color: #d9534f;
   background: #f4d6d5;
+}
+
+.notcoastal-status {
+  border-color: #6c757d;
+  background: #f0efeac1;
 }
 
 .st-label {
@@ -161,6 +175,8 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #3a5a4e;
   user-select: none;
+  height: 120px;
+  justify-content: space-between;
 }
 
 .lineLabelRow {
@@ -201,11 +217,20 @@ body {
   opacity: 0.7;
 }
 
-.st-word {
-  font-size: 16px;
-  font-weight: 700;
+.safe-status .st-word {
   color: #2f7a3e;
-  margin: 4px 0;
+}
+
+.caution-status .st-word {
+  color: #c3861c;
+}
+
+.unsafe-status .st-word {
+  color: #a94442;
+}
+
+.notcoastal-status .st-word {
+  color: #5a6268;
 }
 
 .st-message {
@@ -255,6 +280,7 @@ body {
   align-items: flex-end;
   padding-bottom: 1px;
   background: #E5E4D8;
+  height: 120px
 }
 
 .barCol {
