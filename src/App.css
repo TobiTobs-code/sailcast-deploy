@@ -219,18 +219,43 @@ body {
 
 .safe-status .st-word {
   color: #2f7a3e;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin-left: auto;
+  border: 1.5px solid #3fae60;
+  padding: 1px 8px;
+  border-radius: 20px;
+  
 }
 
 .caution-status .st-word {
   color: #c3861c;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin-left: auto;
+  border: 1.5px solid #e6a817;
+  padding: 1px 8px;
+  border-radius: 20px;
 }
 
 .unsafe-status .st-word {
   color: #a94442;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin-left: auto;
+  border: 1.5px solid #b52d2d;
+  padding: 1px 8px;
+  border-radius: 20px;
 }
 
 .notcoastal-status .st-word {
   color: #5a6268;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin-left: auto;
+  border: 1.5px solid #6c757d;
+  padding: 1px 8px;
+  border-radius: 20px;
 }
 
 .st-message {
