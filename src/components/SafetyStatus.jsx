@@ -134,8 +134,8 @@ export default function SafetyStatus({windspeed, gustspeed, visibility, tidalHei
            <div className = "st-label" style={{color: st.labelcolor}}>
                 <span className="st-dot" style={{backgroundColor: st.dot}}></span>
                 <p className = "st-title">Safety Status</p>
+                <span className="st-word">{st.label}</span>
            </div>
-           <p className = "st-word">{st.label}</p>
            <p className="st-message">{st.message}</p>
         </div>
     )
