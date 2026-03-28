@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
+import Sidebar from './components/Sidebar';
 import { fetchCurrentWeather, fetchForecast } from './api/weather';
 import { fetchTidalData } from './api/marine';
+//need to add sidebar state + pass onSearch to sidebar
 
 function App() {
   const [city, setCity] = useState('');
@@ -11,6 +13,7 @@ function App() {
   const [tidalHeight, setTidalHeight] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   async function handleSearch(searchCity) {
     if (!searchCity.trim()) {
@@ -45,31 +48,40 @@ function App() {
   }
 
   const windspeed = currentWeather ? Math.round(currentWeather.wind.speed * 1.94384) : 0;
-  const gustspeed =
-    currentWeather?.wind?.gust != null
+  const gustspeed = currentWeather?.wind?.gust != null
       ? Math.round(currentWeather.wind.gust * 1.94384)
       : windspeed;
-  const visibility =
-    currentWeather?.visibility != null
+  const visibility = currentWeather?.visibility != null
       ? currentWeather.visibility / 1000
       : 0;
 
   return (
     <div className="app">
-  {loading && <p>Loading...</p>}
-  {error && <p>{error}</p>}
 
-  {/* Dashboard always visible */}
-  <Dashboard
-    currentWeather={currentWeather}
-    forecastData={forecastData}
-    tidalHeight={tidalHeight}
-    windspeed={windspeed}
-    gustspeed={gustspeed}
-    visibility={visibility}
-    onSearch={handleSearch}
-  />
-</div>
+      {/* Sidebar — slides in from left */}
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        onSearch={handleSearch}
+        onFontSizeChange={(size) => {
+          document.documentElement.style.fontSize = size
+        }}
+      />
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+
+      {/* Dashboard always visible */}
+      <Dashboard
+        currentWeather={currentWeather}
+        forecastData={forecastData}
+        tidalHeight={tidalHeight}
+        windspeed={windspeed}
+        gustspeed={gustspeed}
+        visibility={visibility}
+        onSearch={handleSearch}
+        onMenuOpen= {() => setSidebarOpen(true)}
+      />
+    </div>
   );
 }
 
