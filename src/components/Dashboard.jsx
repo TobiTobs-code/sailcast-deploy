@@ -3,6 +3,7 @@ import SafetyStatus from './SafetyStatus'
 import WeatherGraph from './WeatherGraph'
 import WeekForecast from './WeekForecast'
 import WeatherMetrics from './WeatherMetrics'
+//hamburger button to searchbar
 
 export default function Dashboard({
   currentWeather,
@@ -11,7 +12,8 @@ export default function Dashboard({
   windspeed,
   gustspeed,
   visibility,
-  onSearch
+  onSearch,
+  onMenuOpen
 }) {
   const [city, setCity] = useState('')
 
@@ -29,14 +31,20 @@ export default function Dashboard({
 
       {/* SEARCH BAR always visible */}
       <div className="searchBar">
-      <input
-        type="text"
-        placeholder="Enter city"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && handleSearchClick()}
-      />
-        <button onClick={handleSearchClick}>Search</button>
+        {/* Hamburger button, opens sidebar */}
+        <button className="hamburgerBtn" onClick={onMenuOpen}>
+          <span className="hamburgerLine" />
+          <span className="hamburgerLine" />
+          <span className="hamburgerLine" />
+        </button>
+        <input
+          type="text"
+          placeholder="Enter city"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSearchClick()}
+        />
+          <button onClick={handleSearchClick}>Search</button>
       </div>
 
       {/* Weather card only if data exists */}

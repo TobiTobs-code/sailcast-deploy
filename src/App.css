@@ -374,3 +374,296 @@ body {
   font-size: 10px;
   opacity: 0.7;
 }
+
+/* ── Hamburger button ─────────────────────────────────── */
+.hamburgerBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 100%;
+}
+
+.hamburgerLine {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #2b2b2b;
+  border-radius: 2px;
+}
+
+/* ── Sidebar overlay ──────────────────────────────────── */
+.sidebarOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 200;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ── Sidebar panel ────────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 300px;
+  background: #ffffff;
+  z-index: 300;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.12);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Sidebar slides in when open */
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+/* ── Sidebar header ───────────────────────────────────── */
+.sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid #e0d9d0;
+}
+
+.sidebarTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2b2b2b;
+}
+
+.sidebarClose {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #9a9a9a;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.sidebarClose:hover {
+  background: #f0ece4;
+  color: #2b2b2b;
+}
+
+/* ── Sidebar sections ─────────────────────────────────── */
+.sidebarSection {
+  padding: 16px 20px;
+}
+
+.sidebarSectionTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6b6b6b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 12px 0;
+}
+
+.sidebarDivider {
+  height: 1px;
+  background: #e0d9d0;
+  margin: 0 20px;
+}
+
+/* ── Saved locations ──────────────────────────────────── */
+.savedLocations {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.savedLocationsInput {
+  display: flex;
+  gap: 6px;
+}
+
+.savedLocationField {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #e0d9d0;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+  background: #f7f4ef;
+}
+
+.savedLocationField:focus {
+  border-color: #4ba8a0;
+}
+
+.savedLocationAddBtn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  background: #4ba8a0;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.savedLocationAddBtn:disabled {
+  background: #bbb;
+  cursor: not-allowed;
+}
+
+.savedLocationError {
+  font-size: 11px;
+  color: #d9534f;
+  margin: 0;
+}
+
+.savedLocationEmpty {
+  font-size: 13px;
+  color: #9a9a9a;
+  margin: 0;
+}
+
+.savedLocationList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.savedLocationItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f7f4ef;
+  border: 1px solid #e0d9d0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.savedLocationName {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #2b2b2b;
+  cursor: pointer;
+  text-align: left;
+  font-family: "Inter", sans-serif;
+}
+
+.savedLocationName:hover {
+  background: #eef7f6;
+  color: #2d7a74;
+}
+
+.savedLocationRemove {
+  background: none;
+  border: none;
+  padding: 10px 12px;
+  color: #9a9a9a;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.savedLocationRemove:hover {
+  color: #d9534f;
+}
+
+.savedLocationCount {
+  font-size: 11px;
+  color: #9a9a9a;
+  margin: 0;
+}
+
+/* ── Accessibility ────────────────────────────────────── */
+.accessibility {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.accessibilityGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.accessibilityLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2b2b2b;
+  margin: 0;
+}
+
+.accessibilityHint {
+  font-size: 11px;
+  color: #9a9a9a;
+  margin: 0 0 6px 0;
+}
+
+.experienceBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e0d9d0;
+  border-radius: 10px;
+  background: #f7f4ef;
+  cursor: pointer;
+  text-align: left;
+  font-family: "Inter", sans-serif;
+  transition: all 0.15s ease;
+}
+
+.experienceBtn:hover {
+  border-color: #4ba8a0;
+}
+
+.experienceBtnActive {
+  border-color: #4ba8a0;
+  background: #eef7f6;
+}
+
+.experienceBtnLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2b2b2b;
+  min-width: 90px;
+}
+
+.experienceBtnDesc {
+  font-size: 11px;
+  color: #9a9a9a;
+  flex: 1;
+}
+
+.experienceBtnTick {
+  color: #4ba8a0;
+  font-weight: 700;
+}
+
+.accessibilityFooter {
+  font-size: 11px;
+  color: #9a9a9a;
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
