@@ -29,12 +29,13 @@ export default function Dashboard({
 
       {/* SEARCH BAR always visible */}
       <div className="searchBar">
-        <input
-          type="text"
-          placeholder="Enter city"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
+      <input
+        type="text"
+        placeholder="Enter city"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+        onKeyDown={(e) => e.key === 'Enter' && handleSearchClick()}
+      />
         <button onClick={handleSearchClick}>Search</button>
       </div>
 
@@ -55,13 +56,14 @@ export default function Dashboard({
               windGustKt={gustspeed}
               windDirLabel={getWindDirLabel(currentWeather?.wind?.deg ?? 0)}
               windDeg={currentWeather?.wind?.deg ?? 0}
-              waveHeight={tidalHeight ?? 0}
+              waveHeight={tidalHeight ?? 'N/A'}
             />
 
             <SafetyStatus
               windspeed={windspeed}
               gustspeed={gustspeed}
               visibility={visibility}
+              tidalHeight={tidalHeight}
             />
           </div>
 
