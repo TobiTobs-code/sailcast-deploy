@@ -4,12 +4,11 @@ import WeatherGraph from './WeatherGraph'
 import WeekForecast from './WeekForecast'
 import WeatherMetrics from './WeatherMetrics'
 
-//hamburger button to searchbar
-
 export default function Dashboard({
   currentWeather,
   forecastData,
   tidalHeight,
+  fullTidalData, // <-- RESTORED: Catch the full array from App.jsx
   windspeed,
   gustspeed,
   visibility,
@@ -18,6 +17,7 @@ export default function Dashboard({
   onMapOpen
 }) {
   const [city, setCity] = useState('')
+  const [selectedDate, setSelectedDate] = useState(null) // <-- RESTORED: Track clicked days
 
   const getWindDirLabel = (deg) => {
     const dirs = ['N','NE','E','SE','S','SW','W','NW']
@@ -25,7 +25,10 @@ export default function Dashboard({
   }
 
   const handleSearchClick = () => {
-    if (onSearch) onSearch(city)
+    if (onSearch) {
+      onSearch(city)
+      setSelectedDate(null) // Reset back to today on new search
+    }
   }
 
   return (
@@ -34,17 +37,15 @@ export default function Dashboard({
       <div className="dashboard-header">
         <h1 className="dashboard-title">⛵ SailCast</h1>
       </div>
+      
       {/* SEARCH BAR always visible */}
       <div className="searchBar">
-        {/* Hamburger button, opens sidebar */}
         <button className="hamburgerBtn" onClick={onMenuOpen}>
           <span className="hamburgerLine" />
           <span className="hamburgerLine" />
           <span className="hamburgerLine" />
         </button>
-        {/* Map button — opens Windy map */}
         <button className="mapBtn" onClick={onMapOpen} title="View wind map">
-          {/* Map icon SVG */}
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/>
             <path d="M15 5.764v15"/>
@@ -58,7 +59,7 @@ export default function Dashboard({
           onChange={(e) => setCity(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSearchClick()}
         />
-          <button onClick={handleSearchClick}>Search</button>
+        <button onClick={handleSearchClick}>Search</button>
       </div>
 
       {/* Weather card only if data exists */}
@@ -101,11 +102,21 @@ export default function Dashboard({
           <div className="right-panel">
             <div className="forecast-section">
               <div className="forecast-graph">
-                <WeatherGraph forecastData={forecastData} />
+                {/* RESTORED: Passing the marine data and clicked day state */}
+                <WeatherGraph 
+                  forecastData={forecastData} 
+                  marineData={fullTidalData}
+                  selectedDate={selectedDate}
+                />
               </div>
 
               <div className="forecast-week">
-                <WeekForecast forecastData={forecastData} />
+                {/* RESTORED: Passing the click events so the days highlight properly */}
+                <WeekForecast 
+                  forecastData={forecastData} 
+                  selectedDate={selectedDate}
+                  onSelectDay={(dateStr) => setSelectedDate(dateStr)}
+                />
               </div>
             </div>
           </div>
@@ -122,4 +133,3 @@ export default function Dashboard({
     </div>
   )
 }
-
