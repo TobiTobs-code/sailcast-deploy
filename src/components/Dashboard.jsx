@@ -10,7 +10,6 @@ export default function Dashboard({
   currentWeather,
   forecastData,
   tidalHeight,
-  fullTidalData,
   windspeed,
   gustspeed,
   visibility,
@@ -19,7 +18,6 @@ export default function Dashboard({
   onMapOpen
 }) {
   const [city, setCity] = useState('')
-  const [selectedDate, setSelectedDate] = useState(null)
 
   const getWindDirLabel = (deg) => {
     const dirs = ['N','NE','E','SE','S','SW','W','NW']
@@ -27,15 +25,15 @@ export default function Dashboard({
   }
 
   const handleSearchClick = () => {
-    if (onSearch){
-      onSearch(city)
-      setSelectedDate(null)
-    }
+    if (onSearch) onSearch(city)
   }
 
   return (
     <div className="dashboard">
 
+      <div className="dashboard-header">
+        <h1 className="dashboard-title">⛵ SailCast</h1>
+      </div>
       {/* SEARCH BAR always visible */}
       <div className="searchBar">
         {/* Hamburger button, opens sidebar */}
@@ -66,8 +64,17 @@ export default function Dashboard({
       {/* Weather card only if data exists */}
       {currentWeather && (
         <div className="weather-card">
-          <h2>{Math.round(currentWeather?.main?.temp ?? 0)}°C</h2>
-          <p>{currentWeather?.name}</p>
+          <div className="weather-card-top">
+            <div className="weather-card-left">
+              <h2>{Math.round(currentWeather?.main?.temp ?? 0)}°C</h2>
+              <p>{currentWeather?.name}</p>
+            </div>
+            <div className="weather-card-right">
+              <h3>{new Date(currentWeather?.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</h3>
+              <p>{new Date(currentWeather?.dt * 1000).toLocaleDateString([], 
+                {weekday:'long', day: 'numeric', month: 'long', year: 'numeric'})}</p>
+            </div>
+          </div>
         </div>
       )}
 
@@ -94,19 +101,11 @@ export default function Dashboard({
           <div className="right-panel">
             <div className="forecast-section">
               <div className="forecast-graph">
-                <WeatherGraph
-                  forecastData = {forecastData}
-                  marineData = {fullTidalData}
-                  selectedDate = {selectedDate}
-                />
+                <WeatherGraph forecastData={forecastData} />
               </div>
 
               <div className="forecast-week">
-                <WeekForecast
-                  forecastData = {forecastData}
-                  selectedDate={selectedDate}
-                  onSelectDay= {(dateStr) => setSelectedDate(dateStr)}
-                />
+                <WeekForecast forecastData={forecastData} />
               </div>
             </div>
           </div>
@@ -123,3 +122,4 @@ export default function Dashboard({
     </div>
   )
 }
+
