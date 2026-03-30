@@ -19,13 +19,13 @@ export default function Sidebar({ isOpen, onClose, onSearch, onFontSizeChange })
 
         {/* Header */}
         <div className="sidebarHeader">
-          <span className="sidebarTitle">⛵ SailCast</span>
+          <span className="sidebarTitle">MENU</span>
           <button className="sidebarClose" onClick={onClose}>✕</button>
         </div>
 
         {/* Saved Locations section */}
         <div className="sidebarSection">
-          <h3 className="sidebarSectionTitle">⭐ Saved Locations</h3>
+          <h3 className="sidebarSectionTitle">Saved Locations</h3>
           <SavedLocations onSearch={(city) => { onSearch(city); onClose(); }} />
         </div>
 
@@ -34,7 +34,7 @@ export default function Sidebar({ isOpen, onClose, onSearch, onFontSizeChange })
 
         {/* Accessibility section */}
         <div className="sidebarSection">
-          <h3 className="sidebarSectionTitle">♿ Accessibility</h3>
+          <h3 className="sidebarSectionTitle">Accessibility</h3>
           <Accessibility onFontSizeChange={onFontSizeChange} />
         </div>
 
