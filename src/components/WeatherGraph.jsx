@@ -1,29 +1,18 @@
-//the hourly wind/ temp/ rain panel
 import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { getSafetyStatus } from './SafetyStatus';
 
 const tabs = ['wind', 'temperature', 'precipitation'];
 
+//--- Arrow Component ---
 function Arrow({ degrees }) {
     return (
-        <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            className="windArrow"
-            style={{ transform: `rotate(${degrees}deg)` }}
-        >
-            <path
-                d="M7 1 L7 13 M3 5 L7 1 L11 5"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
+        <svg width="14" height="14" viewBox="0 0 14 14" className="windArrow" style={{ transform: `rotate(${degrees}deg)` }}>
+            <path d="M7 1 L7 13 M3 5 L7 1 L11 5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
     );
 }
 
+// --- BarGraph Component ---
 function BarGraph({ data }) {
     const maxVal = Math.max(...data.map((d) => d.value), 1);
 
@@ -34,10 +23,10 @@ function BarGraph({ data }) {
                 const isHighest = point.value === maxVal;
                 return (
                     <div key={i} className="barCol">
-            <span className="barValueLabel">
-              {point.value}
-                <span className="barUnit">{point.unit}</span>
-            </span>
+                        <span className="barValueLabel">
+                            {point.value}
+                            <span className="barUnit">{point.unit}</span>
+                        </span>
 
                         {point.dir !== undefined && point.dir !== null && (
                             <div className={`arrowWrap ${isHighest ? 'arrowHighlight' : ''}`}>
@@ -46,13 +35,16 @@ function BarGraph({ data }) {
                         )}
 
                         <div className="barTrack">
-                            <div
-                                className={`barFill ${isHighest ? 'barFillHighest' : ''}`}
-                                style={{ height: `${heightPct}%` }}
-                            />
+                            <div className={`barFill ${isHighest ? 'barFillHighest' : ''}`} style={{ height: `${heightPct}%` }} />
                         </div>
 
                         <span className="barTimeLabel">{point.time}</span>
+                        
+                        {/* THIS IS THE SAFETY SCORE DOT */}
+                        <div 
+                            style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: point.dotColor, marginTop: '4px' }} 
+                            title={point.status} 
+                        />
                     </div>
                 );
             })}
@@ -60,6 +52,7 @@ function BarGraph({ data }) {
     );
 }
 
+// --- LineGraph Component ---
 function LineGraph({ data }) {
     const canvasRef = useRef(null);
     const maxVal = Math.max(...data.map((d) => d.value), 1);
@@ -122,54 +115,88 @@ function LineGraph({ data }) {
             <div className="lineLabelRow">
                 {data.map((d, i) => (
                     <span key={i} className="lineValueLabel">
-            {d.value}
+                        {d.value}
                         <span className="lineUnit">{d.unit}</span>
-          </span>
+                    </span>
                 ))}
             </div>
             <canvas ref={canvasRef} className="lineCanvas" />
             <div className="lineLabelRow">
                 {data.map((d, i) => (
-                    <span key={i} className="lineTimeLabel">{d.time}</span>
+                    <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+                        <span className="lineTimeLabel">{d.time}</span>
+                        {/* THIS IS THE SAFETY SCORE DOT */}
+                        <div 
+                            style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: d.dotColor, marginTop: '4px' }} 
+                            title={d.status} 
+                        />
+                    </div>
                 ))}
             </div>
         </div>
     );
 }
 
-export default function WeatherGraph({ forecastData }) {
+// --- Main WeatherGraph Component ---
+export default function WeatherGraph({ forecastData, marineData, selectedDate }) {
     const [activeTab, setActiveTab] = useState('wind');
 
     const graphData = useMemo(() => {
         if (!forecastData?.list) return [];
-        const slots = forecastData.list.slice(0, 8);
+        
+        // Find out what "today" is based on the first item in the forecast array
+        const todayStr = new Date(forecastData.list[0].dt * 1000).toISOString().slice(0, 10);
+        const targetDate = selectedDate || todayStr;
+        
+        let slots = [];
+        
+        // NEW FIX: If we are looking at today, grab the next 8 slots (24 hours) immediately.
+        // Otherwise, filter exactly by the chosen future date.
+        if (targetDate === todayStr) {
+            slots = forecastData.list.slice(0, 8);
+        } else {
+            slots = forecastData.list.filter(s => {
+                const slotDate = new Date(s.dt * 1000).toISOString().slice(0, 10);
+                return slotDate === targetDate;
+            }).slice(0, 8);
+        }
 
-        if (activeTab === 'wind') {
-            return slots.map((s) => ({
-                time: new Date(s.dt * 1000).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
-                value: Math.round(s.wind.speed * 1.94384),
-                unit: 'kt',
-                dir: s.wind.deg,
-            }));
-        }
-        if (activeTab === 'temperature') {
-            return slots.map((s) => ({
-                time: new Date(s.dt * 1000).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
-                value: Math.round(s.main.temp),
-                unit: '°C',
-                dir: null,
-            }));
-        }
-        if (activeTab === 'precipitation') {
-            return slots.map((s) => ({
-                time: new Date(s.dt * 1000).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
-                value: parseFloat(((s.rain?.['3h'] ?? 0) + (s.snow?.['3h'] ?? 0)).toFixed(1)),
-                unit: 'mm',
-                dir: null,
-            }));
-        }
-        return [];
-    }, [forecastData, activeTab]);
+        return slots.map((s) => {
+            const timeStr = new Date(s.dt * 1000).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+            
+            // Calculate metrics for the safety score
+            const windKt = Math.round(s.wind.speed * 1.94384);
+            const gustKt = s.wind.gust ? Math.round(s.wind.gust * 1.94384) : windKt;
+            const visKm = (s.visibility ?? 10000) / 1000;
+            
+            // Find matching marine data (wave height) for this specific hour
+            const owIsoHour = new Date(s.dt * 1000).toISOString().slice(0, 14); // "YYYY-MM-DDTHH:"
+            let waveHeight = null;
+            if (marineData?.time) {
+                 const marineIndex = marineData.time.findIndex(t => t.startsWith(owIsoHour));
+                 if (marineIndex !== -1) waveHeight = marineData.wave_height[marineIndex];
+            }
+
+            // Get the Safety Status and determine color
+            const status = getSafetyStatus({ windspeed: windKt, gustspeed: gustKt, visibility: visKm, tidalHeight: waveHeight });
+            let dotColor = "#6c757d"; // Not coastal default (Grey)
+            if (status === 'Safe') dotColor = "#4c9e4c"; // Green
+            if (status === 'Caution') dotColor = "#e6a817"; // Yellow
+            if (status === 'Unsafe') dotColor = "#d9534f"; // Red
+
+            // Return data based on active tab
+            let value, unit, dir;
+            if (activeTab === 'wind') {
+                value = windKt; unit = 'kt'; dir = s.wind.deg;
+            } else if (activeTab === 'temperature') {
+                value = Math.round(s.main.temp); unit = '°C'; dir = null;
+            } else if (activeTab === 'precipitation') {
+                value = parseFloat(((s.rain?.['3h'] ?? 0) + (s.snow?.['3h'] ?? 0)).toFixed(1)); unit = 'mm'; dir = null;
+            }
+
+            return { time: timeStr, value, unit, dir, dotColor, status };
+        });
+    }, [forecastData, marineData, selectedDate, activeTab]);
 
     if (!forecastData?.list) {
         return (

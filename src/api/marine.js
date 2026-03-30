@@ -10,5 +10,5 @@ export async function fetchTidalData(lat, lon) {
   const data = await res.json()
   console.log('MARINE DATA:', data)
 
-  return data.hourly?.wave_height?.[0] ?? null
+  return data.hourly ?? null;
 }

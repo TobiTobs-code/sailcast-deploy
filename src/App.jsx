@@ -63,6 +63,7 @@ function App() {
     }
   }
 
+  const currentTidalValue = tidalHeight?.wave_height ? tidalHeight.wave_height[0] : null;
   const windspeed = currentWeather ? Math.round(currentWeather.wind.speed * 1.94384) : 0;
   const gustspeed = currentWeather?.wind?.gust != null
       ? Math.round(currentWeather.wind.gust * 1.94384)
@@ -102,7 +103,8 @@ function App() {
       <Dashboard
         currentWeather={currentWeather}
         forecastData={forecastData}
-        tidalHeight={tidalHeight}
+        tidalHeight={currentTidalValue}
+        fullTidalData={tidalHeight}
         windspeed={windspeed}
         gustspeed={gustspeed}
         visibility={visibility}

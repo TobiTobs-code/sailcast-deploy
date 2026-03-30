@@ -10,7 +10,7 @@ import React, { useState } from 'react';
  * Visibility (km):
  */
 
-function getSafetyStatus({windspeed, gustspeed, visibility, tidalHeight}) {
+export function getSafetyStatus({windspeed, gustspeed, visibility, tidalHeight}) {
     let weatherscore = 0;
 
     if(tidalHeight == null) {

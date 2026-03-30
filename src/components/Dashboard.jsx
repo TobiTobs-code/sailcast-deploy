@@ -10,6 +10,7 @@ export default function Dashboard({
   currentWeather,
   forecastData,
   tidalHeight,
+  fullTidalData,
   windspeed,
   gustspeed,
   visibility,
@@ -18,6 +19,7 @@ export default function Dashboard({
   onMapOpen
 }) {
   const [city, setCity] = useState('')
+  const [selectedDate, setSelectedDate] = useState(null)
 
   const getWindDirLabel = (deg) => {
     const dirs = ['N','NE','E','SE','S','SW','W','NW']
@@ -25,7 +27,10 @@ export default function Dashboard({
   }
 
   const handleSearchClick = () => {
-    if (onSearch) onSearch(city)
+    if (onSearch){
+      onSearch(city)
+      setSelectedDate(null)
+    }
   }
 
   return (
@@ -89,11 +94,19 @@ export default function Dashboard({
           <div className="right-panel">
             <div className="forecast-section">
               <div className="forecast-graph">
-                <WeatherGraph forecastData={forecastData} />
+                <WeatherGraph
+                  forecastData = {forecastData}
+                  marineData = {fullTidalData}
+                  selectedDate = {selectedDate}
+                />
               </div>
 
               <div className="forecast-week">
-                <WeekForecast forecastData={forecastData} />
+                <WeekForecast
+                  forecastData = {forecastData}
+                  selectedDate={selectedDate}
+                  onSelectDay= {(dateStr) => setSelectedDate(dateStr)}
+                />
               </div>
             </div>
           </div>
