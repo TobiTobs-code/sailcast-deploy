@@ -2,9 +2,9 @@ import { useState } from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import Sidebar from './components/Sidebar';
+import MapPage from './components/MapPage';
 import { fetchCurrentWeather, fetchForecast } from './api/weather';
 import { fetchTidalData } from './api/marine';
-//need to add sidebar state + pass onSearch to sidebar
 
 function App() {
   const [city, setCity] = useState('');
@@ -14,6 +14,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [windyUrl, setWindyUrl] = useState('');
+  const [page, setPage] = useState('dashboard');
 
   async function handleSearch(searchCity) {
     if (!searchCity.trim()) {
@@ -36,13 +38,21 @@ function App() {
 
       const tidal = await fetchTidalData(lat, lon);
       setTidalHeight(tidal);
-      setCity(searchCity); // update city state
-    } catch (err) {
+
+      // Windy embeded URL using the location coordinates
+      setWindyUrl(
+        `https://embed.windy.com/embed2.html?lat=${lat}&lon=${lon}&zoom=10&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=${lat}&detailLon=${lon}&metricWind=kt&metricTemp=°C&radarRange=-1`
+      )
+
+      setCity(searchCity);
+    } 
+    catch (err) {
       setError(err.message);
       setCurrentWeather(null);
       setForecastData(null);
       setTidalHeight(null);
-    } finally {
+    } 
+    finally {
       setLoading(false);
     }
   }
@@ -54,6 +64,17 @@ function App() {
   const visibility = currentWeather?.visibility != null
       ? currentWeather.visibility / 1000
       : 0;
+  
+  // ── Map page — full screen Windy ──────────────────────────────
+  if (page === 'map') {
+    return (
+      <MapPage
+        windyUrl={windyUrl}
+        locationName={currentWeather?.name ?? ''}
+        onBack={() => setPage('dashboard')}
+      />
+    )
+  }
 
   return (
     <div className="app">
@@ -67,6 +88,7 @@ function App() {
           document.documentElement.style.fontSize = size
         }}
       />
+
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
@@ -80,6 +102,7 @@ function App() {
         visibility={visibility}
         onSearch={handleSearch}
         onMenuOpen= {() => setSidebarOpen(true)}
+        onMapOpen={() => setPage('map')}
       />
     </div>
   );
