@@ -36,8 +36,14 @@ function App() {
       const lat = current.coord.lat;
       const lon = current.coord.lon;
 
-      const tidal = await fetchTidalData(lat, lon);
-      setTidalHeight(tidal);
+      // Isolating the tidal data fetch
+      try {
+        const tidal = await fetchTidalData(lat, lon);
+        setTidalHeight(tidal);
+      } catch (tidalErr) {
+        console.warn("Tidal data unavailable (likely an inland location).");
+        setTidalHeight(null);
+      }
 
       // Windy embeded URL using the location coordinates
       setWindyUrl(
