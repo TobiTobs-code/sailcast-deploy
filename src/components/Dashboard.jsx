@@ -14,7 +14,8 @@ export default function Dashboard({
   visibility,
   onSearch,
   onMenuOpen,
-  onMapOpen
+  onMapOpen,
+  BackToHome
 }) {
   const [city, setCity] = useState('')
   const [selectedDate, setSelectedDate] = useState(null) // <-- RESTORED: Track clicked days
@@ -35,9 +36,12 @@ export default function Dashboard({
     <div className="dashboard">
 
       <div className="dashboard-header">
-        <h1 className="dashboard-title">⛵ SailCast</h1>
+        <h1 className="dashboard-title"
+        onClick={BackToHome}
+        style={{cursor: 'pointer'}}>⛵ SailCast</h1>
       </div>
       
+     
       {/* SEARCH BAR always visible */}
       <div className="searchBar">
         <button className="hamburgerBtn" onClick={onMenuOpen}>
