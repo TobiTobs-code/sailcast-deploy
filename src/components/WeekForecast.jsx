@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/WeekForecast.css';
-// ADDED: selectedDate and onSelectDay props
+
 export default function WeekForecast({ forecastData, selectedDate, onSelectDay }) {
     if (!forecastData?.list) return null;
 

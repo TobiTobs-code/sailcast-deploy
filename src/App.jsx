@@ -1,14 +1,14 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import Sidebar from './components/Sidebar';
 import MapPage from './components/MapPage';
+import PopUp from './components/PopUp';
 import { fetchCurrentWeather, fetchForecast } from './api/weather';
 import { fetchTidalData } from './api/marine';
 import boatIcon from './components/assets/icons8-boat-64.svg';
 
-const windyurl = 'https://embed.windy.com/embed2.html?lat=50.9&lon=-1.5&zoom=7&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&metricWind=kt&metricTemp=°C&radarRange=-1';
+//const windyurl = 'https://embed.windy.com/embed2.html?lat=50.9&lon=-1.5&zoom=7&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&metricWind=kt&metricTemp=°C&radarRange=-1';
 
 function App() {
   const [City, setCity] = useState('');
@@ -19,7 +19,14 @@ function App() {
   const [error, setError] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [windyUrl, setWindyUrl] = useState('');
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState('dashboard');
+  const [showPopup, setShowPopup] = useState(false);
+  const [hasAccepted, setHasAccepted] = useState(false);
+
+  // Load Portsmouth automatically on first load
+  useEffect(() => {
+    handleSearch('Portsmouth');
+  }, []);
 
   async function handleSearch(searchCity) {
     if (!searchCity.trim()) {
@@ -40,7 +47,6 @@ function App() {
       const lat = current.coord.lat;
       const lon = current.coord.lon;
 
-      // Isolating the tidal data fetch
       try {
         const tidal = await fetchTidalData(lat, lon);
         setTidalHeight(tidal);
@@ -76,6 +82,28 @@ function App() {
     setPage('home');
   }
 
+  // --- WRAPPER FUNCTIONS FOR POPUP ---
+  function handleSearchWithPopup(searchCity) {
+    if (!hasAccepted) {
+      setShowPopup(true);
+    } else {
+      handleSearch(searchCity);
+    }
+  }
+
+  function handleSidebarWithPopup() {
+    if (!hasAccepted) {
+      setShowPopup(true);
+    } else {
+      setSidebarOpen(true);
+    }
+  }
+
+  function handleHomePage() {
+    handleSearch('Portsmouth');
+    setPage('dashboard');
+  }
+
   const currentTidalValue = tidalHeight?.wave_height ? tidalHeight.wave_height[0] : null;
   const windspeed = currentWeather ? Math.round(currentWeather.wind.speed * 1.94384) : 0;
   const gustspeed = currentWeather?.wind?.gust != null
@@ -96,110 +124,61 @@ function App() {
     )
   }
 
-   if (page === 'home') {
+   // ── Dashboard page ──────────────────────────────
+  if(page === 'dashboard') {
     return (
       <div className="app">
+        
+        {/* The Disclaimer Popup */}
+        <PopUp 
+          isOpen={showPopup} 
+          title="Welcome to SailCast" 
+          onClose={() => {
+            setHasAccepted(true);
+            setShowPopup(false);
+          }}
+        >
+          <p>Please remember that SailCast is a tool for guidance only. Always check official maritime forecasts before sailing.</p>
+          <button 
+            onClick={() => { setHasAccepted(true); setShowPopup(false); }}
+            style={{ marginTop: '15px', padding: '10px 20px', background: '#4ba8a0', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            I Understand
+          </button>
+        </PopUp>
+
+        {/* Sidebar */}
         <Sidebar
           isOpen={sidebarOpen}
           onClose={() => setSidebarOpen(false)}
-          onSearch={handleSearch}
-          onFontSizeChange={(size) => { document.documentElement.style.fontSize = size; }}
-          onBackToMap={handleHomePage}
+          onSearch={handleSearchWithPopup} // Uses popup wrapper
+          onFontSizeChange={(size) => {
+            document.documentElement.style.fontSize = size
+          }}
         />
 
-        <div className="header"> 
-          <h1 
-            className="app-title" 
-            style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}
-          >
-            <img src={boatIcon} alt="SailCast Icon" style={{ width: '36px', height: '36px' }} />
-            SailCast
-          </h1>
-        </div>
+        {loading && <p style={{textAlign: 'center', marginTop: '20px'}}>Loading weather data...</p>}
+        {error && <p style={{textAlign: 'center', color: '#d9534f'}}>{error}</p>}
 
-        {/* Search bar */}
-        <div className="searchBar">
-          <button className="hamburgerBtn" onClick={() => setSidebarOpen(true)}>
-            <span className="hamburgerLine" />
-            <span className="hamburgerLine" />
-            <span className="hamburgerLine" />
-          </button>
-          <input
-            type="text"
-            placeholder="Enter city"
-            value={City}
-            onChange={(e) => setCity(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch(City)}
-          />
-          <button onClick={() => handleSearch(City)}>Search</button>
-        </div>
-
-        
-
-
-        {/* Tagline */}
-        <p className="empty-state-tagline">
+        {/* Dashboard */}
+        <Dashboard
+          currentWeather={currentWeather}
+          forecastData={forecastData}
+          tidalHeight={currentTidalValue}
+          fullTidalData={tidalHeight}
+          windspeed={windspeed}
+          gustspeed={gustspeed}
+          visibility={visibility}
           
-        </p>
-
-       
-        <div className="home-map-container">
-          <iframe
-            src={windyurl}
-            className="home-map-iframe"
-            title="Wind map"
-            allowFullScreen
-          />
-        </div>
-
-        <div className="popular-coast-locations">
-          <p className = "Featured-locations-label">Featured Locations</p>
-          {['Tenby', 'Brighton', 'Cornwall', 'Newquay', 'Devon','Whitby'].map((loc) => (
-              <button 
-                key={loc} 
-                className="popular-location-btn" 
-                onClick={() => handleSearch(loc)}>
-                {loc}
-              </button>
-            ))}
-        </div>
+          onSearch={handleSearchWithPopup} // Uses popup wrapper
+          onMenuOpen={handleSidebarWithPopup} // Uses popup wrapper
+          
+          onMapOpen={() => setPage('map')}
+          BackToHome={handleHomePage}
+        />
       </div>
     );
   }
-if(page === 'dashboard') {
-  return (
-    <div className="app">
-
-      {/* Sidebar — slides in from left */}
-      <Sidebar
-        isOpen={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-        onSearch={handleSearch}
-        onFontSizeChange={(size) => {
-          document.documentElement.style.fontSize = size
-        }}
-      />
-
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-
-      {/* Dashboard always visible */}
-      <Dashboard
-        currentWeather={currentWeather}
-        forecastData={forecastData}
-        tidalHeight={currentTidalValue}
-        fullTidalData={tidalHeight}
-        windspeed={windspeed}
-        gustspeed={gustspeed}
-        visibility={visibility}
-        onSearch={handleSearch}
-        onMenuOpen= {() => setSidebarOpen(true)}
-        onMapOpen={() => setPage('map')}
-        BackToHome={handleHomePage}
-      />
-    </div>
-  );
-}
 }
 export default App;
 
