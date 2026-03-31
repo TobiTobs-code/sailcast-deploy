@@ -118,21 +118,21 @@ body {
 }
 
 .weather-card-left h2 {
-  font-size: 64px;
+  font-size: 4rem;
   font-weight: 600;
   margin: 0;
   letter-spacing: -1px;
 }
 
 .weather-card-left p {
-  font-size: 18px;
+  font-size: 1.125rem;
   margin: 0;
   opacity: 0.9;
 }
 
 .weather-card-right h3 {
   text-align: right;
-  font-size: 24px;
+  font-size: 1.5rem;
   opacity: 0.8;
   margin-left: 6px;
   margin: 0;
@@ -141,7 +141,7 @@ body {
 .weather-card-right p {
   margin: 0;
   text-align: right;
-  font-size: 14px;
+  font-size: 0.875rem;
   opacity: 0.8;
 }
 
@@ -239,14 +239,14 @@ body {
 }
 
 .st-title {
-  font-size: 13px;
+  font-size: 0.8125rem;
   opacity: 0.7;
 }
 
 .safe-status .st-word {
   color: #2f7a3e;
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 0.625rem;
   margin-left: auto;
   border: 1.5px solid #3fae60;
   padding: 1px 8px;
@@ -257,7 +257,7 @@ body {
 .caution-status .st-word {
   color: #c3861c;
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 0.625rem;
   margin-left: auto;
   border: 1.5px solid #e6a817;
   padding: 1px 8px;
@@ -267,7 +267,7 @@ body {
 .unsafe-status .st-word {
   color: #a94442;
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 0.625rem;
   margin-left: auto;
   border: 1.5px solid #b52d2d;
   padding: 1px 8px;
@@ -277,7 +277,7 @@ body {
 .notcoastal-status .st-word {
   color: #5a6268;
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 0.625rem;
   margin-left: auto;
   border: 1.5px solid #6c757d;
   padding: 1px 8px;
@@ -285,7 +285,7 @@ body {
 }
 
 .st-message {
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.4;
   opacity: 0.85;
 }
@@ -307,7 +307,7 @@ body {
 
 .graphTabBar {
   padding-top: 15px;
-  font-size: 20px;
+  font-size: 1.25rem;
   display: flex;
   gap: 10px;
 }
@@ -317,7 +317,7 @@ body {
   border: none;
   cursor: pointer;
   color: #333;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .graphTabActive {
@@ -342,7 +342,7 @@ body {
 }
 
 .barValueLabel {
-  font-size: 11px;
+  font-size: 0.6875rem;
   margin-bottom: 4px;
 }
 
@@ -364,7 +364,7 @@ body {
 }
 
 .barTimeLabel {
-  font-size: 10px;
+  font-size: 0.625rem;
   margin-top: 4px;
 }
 
@@ -379,7 +379,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 11px;
+  font-size: 0.6875rem;
   flex: 1;
 }
 
@@ -397,7 +397,7 @@ body {
 }
 
 .weekDayWind {
-  font-size: 10px;
+  font-size: 0.625rem;
   opacity: 0.7;
 }
 
@@ -463,7 +463,7 @@ body {
 }
 
 .sidebarTitle {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   color: #2b2b2b;
 }
@@ -471,7 +471,7 @@ body {
 .sidebarClose {
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 1.125rem;
   cursor: pointer;
   color: #9a9a9a;
   padding: 4px 8px;
@@ -489,7 +489,7 @@ body {
 }
 
 .sidebarSectionTitle {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 700;
   color: #6b6b6b;
   text-transform: uppercase;
@@ -520,7 +520,7 @@ body {
   padding: 8px 12px;
   border: 1px solid #e0d9d0;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   outline: none;
   background: #f7f4ef;
 }
@@ -536,7 +536,7 @@ body {
   border-radius: 8px;
   background: #4ba8a0;
   color: white;
-  font-size: 20px;
+  font-size: 1.25rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -549,13 +549,13 @@ body {
 }
 
 .savedLocationError {
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: #d9534f;
   margin: 0;
 }
 
 .savedLocationEmpty {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: #9a9a9a;
   margin: 0;
 }
@@ -584,7 +584,7 @@ body {
   background: none;
   border: none;
   padding: 10px 12px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: #2b2b2b;
   cursor: pointer;
   text-align: left;
@@ -602,7 +602,7 @@ body {
   padding: 10px 12px;
   color: #9a9a9a;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .savedLocationRemove:hover {
@@ -610,7 +610,7 @@ body {
 }
 
 .savedLocationCount {
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: #9a9a9a;
   margin: 0;
 }
@@ -629,14 +629,14 @@ body {
 }
 
 .accessibilityLabel {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: #2b2b2b;
   margin: 0;
 }
 
 .accessibilityHint {
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: #9a9a9a;
   margin: 0 0 6px 0;
 }
@@ -666,14 +666,14 @@ body {
 }
 
 .experienceBtnLabel {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: #2b2b2b;
   min-width: 90px;
 }
 
 .experienceBtnDesc {
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: #9a9a9a;
   flex: 1;
 }
@@ -684,7 +684,7 @@ body {
 }
 
 .accessibilityFooter {
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: #9a9a9a;
   margin: 0;
 }
@@ -724,7 +724,7 @@ body {
   background: none;
   border: 1px solid #e0d9d0;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: #2b2b2b;
   cursor: pointer;
@@ -741,7 +741,7 @@ body {
 
 /* ── Page title ───────────────────────────────────────── */
 .mapPageTitle {
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 700;
   color: #2b2b2b;
 }
@@ -771,7 +771,7 @@ body {
 }
 
 .mapPageEmpty p {
-  font-size: 14px;
+  font-size: 0.875rem;
   max-width: 300px;
 }
 
@@ -781,7 +781,7 @@ body {
   border: none;
   border-radius: 10px;
   color: white;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
   font-family: "Inter", sans-serif;
@@ -820,7 +820,7 @@ body {
 }
 
 .st-breakdown-title {
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 700;
   color: #6b6b6b;
   text-transform: uppercase;
@@ -833,7 +833,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: 0.6875rem;
 }
 
 .st-breakdown-label {
@@ -856,7 +856,7 @@ body {
 
 /* ── Scoring explanation note ─────────────────────────── */
 .st-breakdown-note {
-  font-size: 10px;
+  font-size: 0.625rem;
   color: #9a9a9a;
   line-height: 1.5;
   margin: 4px 0 0 0;
