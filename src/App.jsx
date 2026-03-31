@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
@@ -6,8 +7,10 @@ import MapPage from './components/MapPage';
 import { fetchCurrentWeather, fetchForecast } from './api/weather';
 import { fetchTidalData } from './api/marine';
 
+const windyurl = 'https://embed.windy.com/embed2.html?lat=50.9&lon=-1.5&zoom=7&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&metricWind=kt&metricTemp=°C&radarRange=-1';
+
 function App() {
-  const [city, setCity] = useState('');
+  const [City, setCity] = useState('');
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecastData, setForecastData] = useState(null);
   const [tidalHeight, setTidalHeight] = useState(null);
@@ -15,7 +18,7 @@ function App() {
   const [error, setError] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [windyUrl, setWindyUrl] = useState('');
-  const [page, setPage] = useState('dashboard');
+  const [page, setPage] = useState('home');
 
   async function handleSearch(searchCity) {
     if (!searchCity.trim()) {
@@ -40,7 +43,7 @@ function App() {
       try {
         const tidal = await fetchTidalData(lat, lon);
         setTidalHeight(tidal);
-      } catch (tidalErr) {
+      } catch {
         console.warn("Tidal data unavailable (likely an inland location).");
         setTidalHeight(null);
       }
@@ -51,6 +54,7 @@ function App() {
       )
 
       setCity(searchCity);
+      setPage('dashboard'); // Ensure we return to the dashboard after a search
     } 
     catch (err) {
       setError(err.message);
@@ -61,6 +65,14 @@ function App() {
     finally {
       setLoading(false);
     }
+  }
+
+  async function handleHomePage() {
+    setCurrentWeather(null);
+    setForecastData(null);
+    setTidalHeight(null);
+    setCity('');
+    setPage('home');
   }
 
   const currentTidalValue = tidalHeight?.wave_height ? tidalHeight.wave_height[0] : null;
@@ -83,6 +95,72 @@ function App() {
     )
   }
 
+   if (page === 'home') {
+    return (
+      <div className="app">
+        <Sidebar
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          onSearch={handleSearch}
+          onFontSizeChange={(size) => { document.documentElement.style.fontSize = size; }}
+          onBackToMap={handleHomePage}
+        />
+
+        <div className="header"> 
+          <h1 
+            className="app-title">⛵ SailCast</h1>
+        </div>
+
+        {/* Search bar */}
+        <div className="searchBar">
+          <button className="hamburgerBtn" onClick={() => setSidebarOpen(true)}>
+            <span className="hamburgerLine" />
+            <span className="hamburgerLine" />
+            <span className="hamburgerLine" />
+          </button>
+          <input
+            type="text"
+            placeholder="Enter city"
+            value={City}
+            onChange={(e) => setCity(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch(City)}
+          />
+          <button onClick={() => handleSearch(City)}>Search</button>
+        </div>
+
+        
+
+
+        {/* Tagline */}
+        <p className="empty-state-tagline">
+          
+        </p>
+
+       
+        <div className="home-map-container">
+          <iframe
+            src={windyurl}
+            className="home-map-iframe"
+            title="Wind map"
+            allowFullScreen
+          />
+        </div>
+
+        <div className="popular-coast-locations">
+          <p className = "Featured-locations-label">Featured Locations</p>
+          {['Brighton', 'Portsmouth', 'Plymouth', 'Bristol', 'Newquay'].map((loc) => (
+              <button 
+                key={loc} 
+                className="popular-location-btn" 
+                onClick={() => handleSearch(loc)}>
+                {loc}
+              </button>
+            ))}
+        </div>
+      </div>
+    );
+  }
+if(page === 'dashboard') {
   return (
     <div className="app">
 
@@ -111,9 +189,11 @@ function App() {
         onSearch={handleSearch}
         onMenuOpen= {() => setSidebarOpen(true)}
         onMapOpen={() => setPage('map')}
+        BackToHome={handleHomePage}
       />
     </div>
   );
 }
-
+}
 export default App;
+
