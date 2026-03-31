@@ -154,7 +154,7 @@ function App() {
 
         <div className="popular-coast-locations">
           <p className = "Featured-locations-label">Featured Locations</p>
-          {['Brighton', 'Portsmouth', 'Plymouth', 'Bristol', 'Newquay'].map((loc) => (
+          {['Tenby', 'Brighton', 'Cornwall', 'Newquay', 'Devon','Whitby'].map((loc) => (
               <button 
                 key={loc} 
                 className="popular-location-btn" 
