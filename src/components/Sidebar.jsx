@@ -2,6 +2,7 @@
 // Contains SavedLocations and Accessibility sections
 import SavedLocations from './SavedLocations'
 import Accessibility from './Accessibility'
+import './css/Sidebar.css'
 
 export default function Sidebar({ isOpen, onClose, onSearch, onFontSizeChange }) {
   return (

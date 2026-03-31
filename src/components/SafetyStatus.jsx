@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './css/SafetyStatus.css';
 
 /**
  * This component calculates the safety status based on the wind speed, gust speed, and visibility. 

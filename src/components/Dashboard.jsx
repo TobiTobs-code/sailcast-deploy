@@ -4,6 +4,7 @@ import WeatherGraph from './WeatherGraph'
 import WeekForecast from './WeekForecast'
 import WeatherMetrics from './WeatherMetrics'
 import boatIcon from './assets/icons8-boat-64.svg';
+import './css/Dashboard.css'
 
 export default function Dashboard({
   currentWeather,

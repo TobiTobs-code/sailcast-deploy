@@ -1,6 +1,7 @@
 // Full screen Windy map page
 // Shown when user clicks the map icon in the search bar
 // Back button returns to the dashboard
+import './css/ManPage.css'
 
 export default function MapPage({ windyUrl, locationName, onBack }) {
     return (

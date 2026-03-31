@@ -1,6 +1,7 @@
 // Accessibility settings — text size and experience level
 // Settings saved to localStorage and persist between sessions
 import { useState, useEffect } from 'react'
+import './css/Accessibility.css'
 
 // Font size options matching experience levels
 const FONT_SIZES = {

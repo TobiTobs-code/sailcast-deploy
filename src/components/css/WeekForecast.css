@@ -1,0 +1,6 @@
+.weekForecast { display: flex; justify-content: space-between; padding-top: 30px; border-top: 6px solid rgba(0, 0, 0, 0.12); }
+.weekDay { display: flex; flex-direction: column; align-items: center; font-size: 0.6875rem; flex: 1; }
+.weekDayLabel { margin-bottom: 6px; }
+.weekDayIcon { width: 28px; height: 28px; }
+.weekDayTemp { font-weight: 600; }
+.weekDayWind { font-size: 0.625rem; opacity: 0.7; }

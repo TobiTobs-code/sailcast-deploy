@@ -1,6 +1,7 @@
 // Saved locations — stores up to 3 locations in localStorage
 // Clicking a location loads its weather via onSearch prop
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import './css/SavedLocations.css';
 
 export default function SavedLocations({ onSearch }) {
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { getSafetyStatus } from './SafetyStatus';
+import './css/WeatherGraph.css';
 
 const tabs = ['wind', 'temperature', 'precipitation'];
 
