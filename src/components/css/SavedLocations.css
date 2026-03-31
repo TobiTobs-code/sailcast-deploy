@@ -1,3 +1,6 @@
+/* SavedLocations.css
+ Styles for the SavedLocations component, including the input field, add button, error messages, and list of saved locations
+*/
 .savedLocations { display: flex; flex-direction: column; gap: 8px; }
 .savedLocationsInput { display: flex; gap: 6px; }
 .savedLocationField { flex: 1; padding: 8px 12px; border: 1px solid #e0d9d0; border-radius: 8px; font-size: 0.8125rem; outline: none; background: #f7f4ef; }

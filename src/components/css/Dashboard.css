@@ -1,7 +1,11 @@
+/* This styles the main dashboard layout, including the left and right panels, and the forecast section with the weather card and week forecast
+*/
 .dashboard { display: flex; flex-direction: column; gap: 20px; }
 .dashboard-main { display: flex; gap: 20px; }
 .left-panel { flex: 1; display: flex; flex-direction: column; gap: 20px; }
 .right-panel { flex: 2; display: flex; flex-direction: column; gap: 20px; }
+
+/* This styles  the weather forecast section, including the header and layout of the weather graph and week forecast */
 .forecast-section {
   background: #E5E4D8;
   border-radius: 20px;
@@ -10,6 +14,7 @@
   flex-direction: column;
   gap: 30px;
 }
+
 .weather-card {
   min-height: 140px;
   padding: 30px 24px;

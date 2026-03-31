@@ -1,16 +1,68 @@
-# React + Vite
+# SailCast 
+This is a coastal weather app for sailors(Mainly recreational sailors). The app allows the user to search any Coastal Location to get the live wind information e.g gust & speed, tidal height, weekly forecasts and a Safety Status card for sailing conditions.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## App Features
+-Live weather data/forecast for any coastal location
+-Interactive Windy map
+-Assessiblity options
+-Wind,temperature and Percipitation graphs
+-Safety Status card - Switches between safe,caution and Unsafe based on the weather forecasts using wind gust/speed, tidal height & visibility.
+-7-day weather forecasts
+-Favourite locations can be saved and accessed via Sidebar menu
 
-Currently, two official plugins are available:
+## Starting
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Prerequisites
+-Node.js is installed on your system
+-An Open Weather API key - available on https://openweathermap.org/api
 
-## React Compiler
+### Installation Process
+1. Clone the repository:
+''bash
+  git clone https://github.com/yourusername/sailcast.git
+  cd sailcastv0
+''
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Install dependencies
+''bash
+  npm install
+''
 
-## Expanding the ESLint configuration
+3. Create a js file and paste in the root foleder and add your generated API key:
+'' 
+    WEATHER_API_KEY = api_key_here
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Running the App
+''bash
+  npm run dev
+''
+
+Then open the link in the terminal which is usually http://localhost:5173/ in your browser
+
+## Teck Stack
+- React + Vite
+- OpenWeatherApp API - weather forecast
+- Windy Embed API - windy map
+- Open-Meteo API - tidal height data
+- CSS
+
+## Project Structure
+src/
+├── api/
+│   ├── weather.js       # OpenWeatherMap API calls
+│   └── marine.js        # Tidal data API calls
+├── components/
+│   ├── Dashboard.jsx    # Main dashboard layout
+│   ├── SafetyStatus.jsx # Safety Status card
+│   ├── WeatherGraph.jsx # Wind/temp/precipitation graphs
+│   ├── WeatherMetrics.jsx # Wind speed, gust, direction
+│   ├── WeekForecast.jsx # 7-day forecasts from API
+│   ├── Sidebar.jsx      # Slide-in - menu
+│   ├── SavedLocations.jsx
+│   ├── Accessibility.jsx
+│   └── MapPage.jsx      # Full screen Windy map(Wind map)
+├── App.jsx
+├── App.css
+└── main.jsx
+
+
