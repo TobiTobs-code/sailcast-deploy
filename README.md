@@ -49,18 +49,18 @@ Then open the link in the terminal which is usually http://localhost:5173/ in yo
 ## Project Structure
 src/
 ├── api/
-│   ├── weather.js       # OpenWeatherMap API calls
-│   └── marine.js        # Tidal data API calls
+│   ├── weather.js      
+│   └── marine.js    
 ├── components/
-│   ├── Dashboard.jsx    # Main dashboard layout
-│   ├── SafetyStatus.jsx # Safety Status card
-│   ├── WeatherGraph.jsx # Wind/temp/precipitation graphs
-│   ├── WeatherMetrics.jsx # Wind speed, gust, direction
-│   ├── WeekForecast.jsx # 7-day forecasts from API
-│   ├── Sidebar.jsx      # Slide-in - menu
+│   ├── Dashboard.jsx   
+│   ├── SafetyStatus.jsx 
+│   ├── WeatherGraph.jsx 
+│   ├── WeatherMetrics.jsx 
+│   ├── WeekForecast.jsx 
+│   ├── Sidebar.jsx     
 │   ├── SavedLocations.jsx
 │   ├── Accessibility.jsx
-│   └── MapPage.jsx      # Full screen Windy map(Wind map)
+│   └── MapPage.jsx     
 ├── App.jsx
 ├── App.css
 └── main.jsx
