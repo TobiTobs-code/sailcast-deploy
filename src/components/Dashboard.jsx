@@ -3,6 +3,7 @@ import SafetyStatus from './SafetyStatus'
 import WeatherGraph from './WeatherGraph'
 import WeekForecast from './WeekForecast'
 import WeatherMetrics from './WeatherMetrics'
+import boatIcon from './assets/icons8-boat-64.svg';
 
 export default function Dashboard({
   currentWeather,
@@ -33,12 +34,15 @@ export default function Dashboard({
   }
 
   return (
-    <div className="dashboard">
+      <div className="dashboard">
 
       <div className="dashboard-header">
         <h1 className="dashboard-title"
         onClick={BackToHome}
-        style={{cursor: 'pointer'}}>⛵ SailCast</h1>
+        style={{cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px'}}>
+          <img src={boatIcon} alt="SailCast Icon" style={{ width: '32px', height: '32px' }} /> 
+          SailCast
+        </h1>
       </div>
       
      

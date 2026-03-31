@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar';
 import MapPage from './components/MapPage';
 import { fetchCurrentWeather, fetchForecast } from './api/weather';
 import { fetchTidalData } from './api/marine';
+import boatIcon from './components/assets/icons8-boat-64.svg';
 
 const windyurl = 'https://embed.windy.com/embed2.html?lat=50.9&lon=-1.5&zoom=7&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&metricWind=kt&metricTemp=°C&radarRange=-1';
 
@@ -108,7 +109,12 @@ function App() {
 
         <div className="header"> 
           <h1 
-            className="app-title">⛵ SailCast</h1>
+            className="app-title" 
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}
+          >
+            <img src={boatIcon} alt="SailCast Icon" style={{ width: '36px', height: '36px' }} />
+            SailCast
+          </h1>
         </div>
 
         {/* Search bar */}
