@@ -116,21 +116,18 @@ function LineGraph({ data }) {
             <div className="lineLabelRow">
                 {data.map((d, i) => (
                     <span key={i} className="lineValueLabel">
-                        {d.value}
+                {d.value}
                         <span className="lineUnit">{d.unit}</span>
-                    </span>
+            </span>
                 ))}
             </div>
             <canvas ref={canvasRef} className="lineCanvas" />
+            <div className="lineGraphDivider" />
             <div className="lineLabelRow">
                 {data.map((d, i) => (
-                    <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+                    <div key={i} className="lineTimeCol">
                         <span className="lineTimeLabel">{d.time}</span>
-                        {/* THIS IS THE SAFETY SCORE DOT */}
-                        <div 
-                            style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: d.dotColor, marginTop: '4px' }} 
-                            title={d.status} 
-                        />
+                        <div className="safetyDot" style={{ backgroundColor: d.dotColor }} title={d.status} />
                     </div>
                 ))}
             </div>
