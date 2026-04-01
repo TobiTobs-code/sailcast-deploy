@@ -1,4 +1,5 @@
 //the wind/gust/direction/tide grid
+import { useState } from 'react';
 import './css/WeatherMetrics.css';
 
 export default function WeatherMetrics({ 
@@ -33,18 +34,40 @@ export default function WeatherMetrics({
     hour: "2-digit", 
     minute: "2-digit" 
   })
+  const [showInfo, setShowInfo] = useState(false);
 
   return (
     <div className="card">
-      <div className="lastUpdated">
-        {/* Clock icon */}
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" strokeWidth="2">
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12,6 12,12 16,14"/>
-        </svg>
+        <div className="metricsHeader">
+            <div className="lastUpdated">
+                {/* Clock icon */}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12,6 12,12 16,14"/>
+                </svg>
+                Last updated: {lastUpdated}
+            </div>
+            <button className="wg-info-btn" onClick={() => setShowInfo(!showInfo)} title="What does Beaufort scale mean?">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4"/>
+                    <path d="M12 8h.01"/>
+                </svg>
+            </button>
+        </div>
 
-        Last updated: {lastUpdated}
-      </div>
+        {showInfo && (
+            <div className="wg-info-panel">
+                <p className="wg-info-title">Beaufort Scale (F) — Gust Info:</p>
+                <ul className="wg-info-list">
+                    <li><strong>F0–F2:</strong> Calm to light breeze — ideal for beginners.</li>
+                    <li><strong>F3–F4:</strong> Gentle to moderate breeze — good sailing conditions.</li>
+                    <li><strong>F5–F6:</strong> Fresh to strong breeze — experienced sailors only.</li>
+                    <li><strong>F7–F8:</strong> Near gale to gale — experts only, high risk.</li>
+                    <li><strong>F9+:</strong> Severe gale and above — do not sail.</li>
+                </ul>
+            </div>
+        )}
 
       {/* 2x2 grid */}
       <div className="grid">
