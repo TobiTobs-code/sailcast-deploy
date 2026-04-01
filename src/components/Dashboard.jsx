@@ -6,6 +6,7 @@ import WeatherMetrics from './WeatherMetrics'
 import boatIcon from './assets/icons8-boat-64.svg';
 import './css/Dashboard.css'
 
+// Main dashboard component displaying current weather, forecast, and safety status
 export default function Dashboard({
   currentWeather,
   forecastData,
@@ -34,6 +35,8 @@ export default function Dashboard({
     }
   }
 
+  // Dashboard layout with header, search bar, current weather card, 
+ //and main content area for metrics and forecast
   return (
     <div className="dashboard">
 
@@ -54,7 +57,9 @@ export default function Dashboard({
         </h1>
       </div>
      
+
       {/* SEARCH BAR */}
+      {/* The search bar includes a hamburger menu button, a map button, an input field for city name, and a search button.*/}
       <div className="searchBar">
         <button className="hamburgerBtn" onClick={onMenuOpen}>
           <span className="hamburgerLine" />

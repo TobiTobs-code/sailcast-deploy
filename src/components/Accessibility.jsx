@@ -9,6 +9,7 @@ const FONT_SIZES = {
   '100%': '16px',
 }
 
+// Accessibility feature allows users to adjust text size across the app - Standard, Large, Extra Large
 export default function Accessibility({ onFontSizeChange }) {
 
   const [textSize, setTextSize] = useState(() => {

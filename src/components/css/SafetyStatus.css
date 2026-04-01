@@ -1,5 +1,6 @@
 /* SafetyStatus.css
- This styles the SafetyStatus component, including the card layout, status colors, labels, and breakdown details
+ This styles the SafetyStatus component, including the card layout, 
+ status colors, labels, and breakdown details
 */
 .safety-status-card { 
     display: flex; 
