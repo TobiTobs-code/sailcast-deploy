@@ -142,15 +142,18 @@ export default function WeatherGraph({ forecastData, marineData, selectedDate })
 
     const graphData = useMemo(() => {
         if (!forecastData?.list) return [];
-        
+
+        // Find out current day based on the first item in the forecast array
         const todayStr = new Date(forecastData.list[0].dt * 1000).toISOString().slice(0, 10);
         const targetDate = selectedDate || todayStr;
         
         let slots = [];
-        
+
+        // Grab the next 8 slots (24 hours) for current day
         if (targetDate === todayStr) {
             slots = forecastData.list.slice(0, 8);
         } else {
+            // Future date selected — filter forecast list to matching date, cap at 8 slots (24hrs)
             slots = forecastData.list.filter(s => {
                 const slotDate = new Date(s.dt * 1000).toISOString().slice(0, 10);
                 return slotDate === targetDate;
@@ -159,7 +162,8 @@ export default function WeatherGraph({ forecastData, marineData, selectedDate })
 
         return slots.map((s) => {
             const timeStr = new Date(s.dt * 1000).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-            
+
+            // Calculate metrics used to calculate the safety status
             const windKt = Math.round(s.wind.speed * 1.94384);
             const gustKt = s.wind.gust ? Math.round(s.wind.gust * 1.94384) : windKt;
             const visKm = (s.visibility ?? 10000) / 1000;
@@ -171,12 +175,14 @@ export default function WeatherGraph({ forecastData, marineData, selectedDate })
                  if (marineIndex !== -1) waveHeight = marineData.wave_height[marineIndex];
             }
 
+            // Retrieve the safety status and its appropriate colour
             const status = getSafetyStatus({ windspeed: windKt, gustspeed: gustKt, visibility: visKm, tidalHeight: waveHeight });
             let dotColor = "#6c757d"; 
             if (status === 'Safe') dotColor = "#4c9e4c"; 
             if (status === 'Caution') dotColor = "#e6a817"; 
-            if (status === 'Unsafe') dotColor = "#d9534f"; 
+            if (status === 'Unsafe') dotColor = "#d9534f";
 
+            // Return data based on current active tab
             let value, unit, dir;
             if (activeTab === 'wind') {
                 value = windKt; unit = 'kt'; dir = s.wind.deg;
