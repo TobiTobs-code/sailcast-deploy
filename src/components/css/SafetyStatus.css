@@ -1,5 +1,6 @@
 /* SafetyStatus.css
- This styles the SafetyStatus component, including the card layout, status colors, labels, and breakdown details
+ This styles the SafetyStatus component, including the card layout, 
+ status colors, labels, and breakdown details
 */
 .safety-status-card { 
     display: flex; 
@@ -12,9 +13,9 @@
     border: 2px solid #4caf50; 
     background: #dfeee2; 
 }
-.safe-status { border-color: #4caf50; background: #dfeee2; }
-.caution-status { border-color: #e6a817; background: #f4ead2; }
-.unsafe-status { border-color: #d9534f; background: #f4d6d5; }
+.safe-status { border-color: #4caf50; background: #dfeee2; border-width:4px; }
+.caution-status { border-color: #e6a817; background: #f4ead2; border-width:4px;}
+.unsafe-status { border-color: #d9534f; background: #f4d6d5;border-width:4px; }
 .notcoastal-status { border-color: #6c757d; background: #f0efeac1; }
 .st-label { display: flex; align-items: center; gap: 8px; font-weight: 600; margin-bottom: 6px; }
 .st-dot { width: 10px; height: 10px; border-radius: 50%; }

@@ -2,44 +2,41 @@
 This is a coastal weather app for sailors(Mainly recreational sailors). The app allows the user to search any Coastal Location to get the live wind information e.g gust & speed, tidal height, weekly forecasts and a Safety Status card for sailing conditions.
 
 ## App Features
--Live weather data/forecast for any coastal location
--Interactive Windy map
--Assessiblity options
--Wind,temperature and Percipitation graphs
--Safety Status card - Switches between safe,caution and Unsafe based on the weather forecasts using wind gust/speed, tidal height & visibility.
--7-day weather forecasts
--Favourite locations can be saved and accessed via Sidebar menu
+- Live weather data/forecast for any coastal location (Default Location - Portsmouth)
+- Interactive Windy map
+- Assessiblity options(font options)
+- Wind,temperature and Percipitation graphs
+- Safety Status card - Switches between safe,caution and Unsafe based on the weather forecasts using wind gust/speed, tidal height & visibility.
+- 7-day weather forecasts
+- Time & Date displayed on dashboard
+- Favourite locations can be saved and accessed via Sidebar menu
 
 ## Starting
 
 ### Prerequisites
--Node.js is installed on your system
--An Open Weather API key - available on https://openweathermap.org/api
+- Node.js is installed on your system
+- An Open Weather API key - available on https://openweathermap.org/api
 
 ### Installation Process
 1. Clone the repository:
-''bash
+'''bash
   git clone https://github.com/yourusername/sailcast.git
   cd sailcastv0
-''
+'''
 
 2. Install dependencies
-''bash
+'''bash
   npm install
-''
-
-3. Create a js file and paste in the root foleder and add your generated API key:
-'' 
-    WEATHER_API_KEY = api_key_here
+''' 
 
 ### Running the App
-''bash
+'''bash
   npm run dev
-''
+'''
 
 Then open the link in the terminal which is usually http://localhost:5173/ in your browser
 
-## Teck Stack
+## Tech Stack
 - React + Vite
 - OpenWeatherApp API - weather forecast
 - Windy Embed API - windy map

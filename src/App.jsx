@@ -8,6 +8,8 @@ import { fetchCurrentWeather, fetchForecast } from './api/weather';
 import { fetchTidalData } from './api/marine';
 import boatIcon from './components/assets/icons8-boat-64.svg';
 
+// Main App component managing state, data fetching, and page navigation.
+
 //const windyurl = 'https://embed.windy.com/embed2.html?lat=50.9&lon=-1.5&zoom=7&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&metricWind=kt&metricTemp=°C&radarRange=-1';
 
 function App() {

@@ -1,3 +1,4 @@
+// Fetch tidal data from Open-Meteo Marine API
 export async function fetchTidalData(lat, lon) {
   const res = await fetch(
     `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&hourly=wave_height`

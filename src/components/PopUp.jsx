@@ -2,6 +2,8 @@
 import React from 'react';
 import './css/PopUp.css';
 
+// Simple pop-up component for displaying a welcome message and additional info. 
+//Can be reused for other pop-up needs in the app.
 export default function PopUp({ isOpen, onClose, title, children }) {
   if (!isOpen) return null;
 

@@ -1,3 +1,5 @@
+/* This styles the WeatherMetrics component, which shows the live weather information(Wind speed, gust & 
+direction along with wave height) on a card */
 .card {
     background: #ffffff;
     border: 1px solid #e0d9d0;

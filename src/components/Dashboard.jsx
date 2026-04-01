@@ -6,6 +6,7 @@ import WeatherMetrics from './WeatherMetrics'
 import boatIcon from './assets/icons8-boat-64.svg';
 import './css/Dashboard.css'
 
+// Main dashboard component displaying current weather, forecast, and safety status
 export default function Dashboard({
   currentWeather,
   forecastData,
@@ -34,27 +35,54 @@ export default function Dashboard({
     }
   }
 
+  // Dashboard layout with header, search bar, current weather card, 
+ //and main content area for metrics and forecast
   return (
-    <div className="dashboard">
+<div className="dashboard">
 
-      <div className="dashboard-header">
-        <h1 className="dashboard-title"
-          onClick={BackToHome}
-          style={{
-            cursor: 'pointer', 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '12px',
-            fontFamily: "'Cedarville Cursive', cursive", // <-- Cedarville Cursive applied!
-            fontSize: '2.5rem',
-            margin: '0'
-          }}>
-          <img src={boatIcon} alt="SailCast Icon" style={{ width: '40px', height: '40px' }} /> 
-          SailCast
-        </h1>
-      </div>
-     
+  <div
+    className="dashboard-header"
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '16px'
+    }}
+  >
+    <h1
+      className="dashboard-title"
+      onClick={BackToHome}
+      style={{
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        fontFamily: "'Cedarville Cursive', cursive",
+        fontSize: '2.5rem',
+        margin: '0'
+      }}
+    >
+      <img src={boatIcon} alt="SailCast Icon" style={{ width: '40px', height: '40px' }} />
+      SailCast
+    </h1>
+    <h2
+      className="dashboard-tagline"
+      style={{
+        fontWeight: 500,
+        fontFamily: "'Poppins', sans-serif",
+        alignItems: 'center',
+        fontSize: '0.8rem',
+        marginTop: '30px',
+        opacity: 0.7
+      }}
+    >
+      Forecasting the Sea, Simplifying Your Sail.
+    </h2>
+
+  </div>
+
+
       {/* SEARCH BAR */}
+      {/* The search bar includes a hamburger menu button, a map button, an input field for city name, and a search button.*/}
       <div className="searchBar">
         <button className="hamburgerBtn" onClick={onMenuOpen}>
           <span className="hamburgerLine" />

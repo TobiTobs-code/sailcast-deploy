@@ -1,6 +1,7 @@
 const API_KEY = 'ee4776e6d3ed2ee744ace4b628bc7312'
 const BASE_URL = 'https://api.openweathermap.org/data/2.5'
 
+// Fetch current weather data for a specific city
 export async function fetchCurrentWeather(city) {
   const response = await fetch(
     `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`
