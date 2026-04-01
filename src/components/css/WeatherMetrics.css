@@ -1,108 +1,123 @@
-/* This styles the WeatherMetrics component, which shows the live weather information(Wind speed, gust & 
-direction along with wave height) on a card */
+/* This styles the WeatherMetrics component */
 .card {
-    background: #ffffff;
-    border: 1px solid #e0d9d0;
-    border-radius: 14px;
-    padding: 16px;
-    position: relative;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
-    font-family: 'DM Sans', sans-serif;
-    overflow: visible;
-  }
-  
-  .lastUpdated {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.6875rem;
-    color: #9a9a9a;
-    margin-bottom: 12px;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: #e0d9d0;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .metricsHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-    overflow: visible;
-  }
-
-.metricsHeader .wg-info-panel {
-    position: absolute;
-    top: 28px;
-    left: 0;
-    z-index: 10;
-    width: 100%;
-    margin: 0;
-    box-sizing: border-box;
-    border-radius: 12px;
-    max-height: 70vh;
-    overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #e0d9d0;
+  border-radius: 14px;
+  padding: 16px;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+  font-family: 'DM Sans', sans-serif;
 }
 
-  .metric {
-    background: #ffffff;
-    padding: 16px 8px; /* Slightly reduced side padding to give text more room */
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: center;
-  }
-  
-  .metricTop {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    justify-content: center;
+.lastUpdated {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.6875rem;
+  color: #9a9a9a;
+  margin-bottom: 12px;
+}
 
-  }
-  
-  .metricValue {
-    font-size: 1.625rem;
-    font-weight: 600;
-    color: #1a1a1a;
-    line-height: 1;
-  }
-  
-  .metricUnit {
-    font-size: 0.8125rem;
-    font-weight: 400;
-    color: #6b6b6b;
-    align-self: flex-end;
-    margin-bottom: 3px;
-  }
-  
-  .metricLabel {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.8125rem; /* Adjusted slightly so it fits beautifully */
-    color: #9a9a9a;
-    justify-content: center;
-    white-space: nowrap; /* Forces text to stay on a single line! */
-  }
-  
-  .directionValue {
-    font-size: 1.625rem;
-    font-weight: 600;
-    color: #1a1a1a;
-    line-height: 1;
-    font-family: monospace;
-  }
-  
-  .beaufortLabel {
-    font-size: 0.8125rem;
-    color: #4ba8a0;
-    font-weight: 600;
-  }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #e0d9d0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.metricsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- NEW STYLES FOR THE BEAUFORT INFO PANEL --- */
+.wm-info-panel {
+  background: #f7f4ef;
+  border: 1px solid #e0d9d0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 16px; /* Pushes the grid down so nothing gets squished! */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.wm-info-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #2b2b2b;
+  text-transform: uppercase;
+  margin: 0 0 8px 0;
+}
+
+.wm-info-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.75rem;
+  color: #6b6b6b;
+  line-height: 1.5;
+}
+
+.wm-info-list li {
+  margin-bottom: 6px;
+}
+/* ---------------------------------------------- */
+
+.metric {
+  background: #ffffff;
+  padding: 16px 8px; 
+  display: flex;
+  flex-direction: column;
+  gap: 9px; /* <-- Reduced this gap to bring them closer */
+  justify-content: center; /* <-- Changed from space-between to center */
+  align-items: center;
+  min-height: 90px; 
+}
+
+.metricTop {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  justify-content: center;
+  /* Deleted flex: 1 and padding-top here! */
+}
+
+.metricValue {
+  font-size: 1.625rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.metricUnit {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #6b6b6b;
+  /* Deleted align-self and margin-bottom! */
+}
+
+.metricLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem; 
+  color: #9a9a9a;
+  justify-content: center;
+  white-space: nowrap; 
+}
+
+.directionValue {
+  font-size: 1.625rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1;
+  font-family: monospace;
+}
+
+.beaufortLabel {
+  font-size: 0.6875rem;
+  color: #4ba8a0;
+  font-weight: 600;
+  margin-left: -3px; 
+}

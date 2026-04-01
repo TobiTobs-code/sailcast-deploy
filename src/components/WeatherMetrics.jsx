@@ -27,8 +27,6 @@ export default function WeatherMetrics({
     return 12
   }
 
-  // ── Last updated time ─────────────────────────────────────────
-  // Shows the current time as the last updated timestamp
   const now = new Date()
   const lastUpdated = now.toLocaleTimeString("en-GB", { 
     hour: "2-digit", 
@@ -40,7 +38,6 @@ export default function WeatherMetrics({
     <div className="card">
         <div className="metricsHeader">
             <div className="lastUpdated">
-                {/* Clock icon */}
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" strokeWidth="2">
                     <circle cx="12" cy="12" r="10"/>
                     <polyline points="12,6 12,12 16,14"/>
@@ -56,10 +53,11 @@ export default function WeatherMetrics({
             </button>
         </div>
 
+        {/* CHANGED TO wm-info-panel */}
         {showInfo && (
-            <div className="wg-info-panel">
-                <p className="wg-info-title">Beaufort Scale (F) — Gust Info:</p>
-                <ul className="wg-info-list">
+            <div className="wm-info-panel">
+                <p className="wm-info-title">Beaufort Scale (F) — Gust Info:</p>
+                <ul className="wm-info-list">
                     <li><strong>F0–F2:</strong> Calm to light breeze — ideal for beginners.</li>
                     <li><strong>F3–F4:</strong> Gentle to moderate breeze — good sailing conditions.</li>
                     <li><strong>F5–F6:</strong> Fresh to strong breeze — experienced sailors only.</li>
@@ -78,7 +76,6 @@ export default function WeatherMetrics({
             <span className="metricValue">{windSpeedKt}</span>
             <span className="metricUnit">kt</span>
           </div>
-          {/* Label with wind icon */}
           <div className="metricLabel">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ba8a0" strokeWidth="2">
               <path d="M9.59 4.59A2 2 0 1 1 11 8H2"/>
@@ -95,7 +92,6 @@ export default function WeatherMetrics({
             <span className="metricValue">{windGustKt}</span>
             <span className="metricUnit">kt</span>
           </div>
-          {/* Label with gust icon + Beaufort force */}
           <div className="metricLabel">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ba8a0" strokeWidth="2">
               <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/>
@@ -103,9 +99,8 @@ export default function WeatherMetrics({
               <path d="M12.6 19.4A2 2 0 1 0 14 16H2"/>
             </svg>
             Gust Info
-            {/* Beaufort force shown next to label */}
             <span className="beaufortLabel">
-              · F{getBeaufort(windGustKt)}
+              ·F{getBeaufort(windGustKt)}
             </span>
           </div>
         </div>
@@ -114,26 +109,14 @@ export default function WeatherMetrics({
         <div className="metric">
           <div className="metricTop">
             <span className="directionValue">{windDirLabel}</span>
-            {/* Arrow rotates to match wind direction degrees */}
             <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#2d7a74"
-              strokeWidth="2"
-              style={{ 
-                marginLeft: '4px',
-                marginBottom: '2px',
-                transform: `rotate(${windDeg}deg)`,
-                transition: 'transform 0.4s ease'
-              }}
+              width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2d7a74" strokeWidth="2"
+              style={{ marginLeft: '4px', marginBottom: '2px', transform: `rotate(${windDeg}deg)`, transition: 'transform 0.4s ease' }}
             >
               <line x1="12" y1="20" x2="12" y2="4"/>
               <polyline points="5,11 12,4 19,11"/>
             </svg>
           </div>
-          {/* Label with compass icon */}
           <div className="metricLabel">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ba8a0" strokeWidth="2">
               <circle cx="12" cy="12" r="10"/>
@@ -149,7 +132,6 @@ export default function WeatherMetrics({
             <span className="metricValue">{waveHeight}</span>
             <span className="metricUnit">m</span>
           </div>
-          {/* Label with wave icon */}
           <div className="metricLabel">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ba8a0" strokeWidth="2">
               <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/>
