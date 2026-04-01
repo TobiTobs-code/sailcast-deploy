@@ -2,17 +2,22 @@
 */
 .dashboard { display: flex; flex-direction: column; gap: 20px; }
 .dashboard-main { display: flex; gap: 20px; }
-.left-panel { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-.right-panel { flex: 2; display: flex; flex-direction: column; gap: 20px; }
+.left-panel { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; }
+.right-panel { flex: 2; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
 
-/* This styles  the weather forecast section, including the header and layout of the weather graph and week forecast */
+/* This styles the weather forecast section, including the header and layout of the weather graph and week forecast */
 .forecast-section {
   background: #E5E4D8;
   border-radius: 20px;
-  padding: 20px;
+  padding: 20px 24px;
   display: flex;
   flex-direction: column;
   gap: 30px;
+  justify-content: space-between;
+}
+
+.forecast-week {
+  margin-top: 15px; 
 }
 
 .weather-card {
@@ -45,7 +50,7 @@
     text-align: right; 
     font-size: 1.5rem; 
     opacity: 0.8; 
-    margin-left: 
-    6px; margin: 0; }
+    margin-left: 6px; 
+    margin: 0; }
     
 .weather-card-right p { margin: 0; text-align: right; font-size: 0.875rem; opacity: 0.8; }

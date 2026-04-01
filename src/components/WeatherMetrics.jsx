@@ -1,5 +1,5 @@
 //the wind/gust/direction/tide grid
-//!!For tidal height, api= https://open-meteo.com/en/docs/marine-weather-api
+import './css/WeatherMetrics.css';
 
 export default function WeatherMetrics({ 
   windSpeedKt, 
@@ -34,109 +34,9 @@ export default function WeatherMetrics({
     minute: "2-digit" 
   })
 
-  // ── Styles ────────────────────────────────────────────────────
-  const styles = {
-
-    // Outer white card
-    card: {
-      background: '#ffffff',
-      border: '1px solid #e0d9d0',
-      borderRadius: '14px',
-      padding: '16px',
-      position: 'relative',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05)',
-      fontFamily: "'DM Sans', sans-serif",
-    },
-
-    // Last updated bar at the top
-    lastUpdated: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '5px',
-      fontSize: '0.6875rem',
-      color: '#9a9a9a',
-      marginBottom: '12px',
-    },
-
-    // The 2x2 grid container
-    grid: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: '1px',
-      background: '#e0d9d0',
-      borderRadius: '10px',
-      overflow: 'hidden',
-    },
-
-    // Each individual metric box
-    metric: {
-      background: '#ffffff',
-      padding: '14px',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '6px',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-
-    // Row inside each box holding value + unit
-    metricTop: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '4px',
-      justifyContent: 'center',
-    },
-
-    // The big number
-    metricValue: {
-      fontSize: '1.625rem',
-      fontWeight: '600',
-      color: '#1a1a1a',
-      lineHeight: '1',
-    },
-
-    // The unit (kt, m etc.)
-    metricUnit: {
-      fontSize: '0.8125rem',
-      fontWeight: '400',
-      color: '#6b6b6b',
-      alignSelf: 'flex-end',
-      marginBottom: '3px',
-    },
-
-    // Bottom label row — icon + text
-    metricLabel: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '5px',
-      fontSize: '0.6875rem',
-      color: '#9a9a9a',
-      justifyContent: 'center',
-    },
-
-    // NE / SW etc uses monospace font
-    directionValue: {
-      fontSize: '1.625rem',
-      fontWeight: '600',
-      color: '#1a1a1a',
-      lineHeight: '1',
-      fontFamily: 'monospace',
-    },
-
-    // Beaufort label under gust
-    beaufortLabel: {
-      fontSize: '0.6875rem',
-      color: '#4ba8a0',
-      fontWeight: '600',
-    },
-  }
-
   return (
-    <div style={styles.card}>
-
-      {/* Last updated timestamp at top */}
-      <div style={styles.lastUpdated}>
-
+    <div className="card">
+      <div className="lastUpdated">
         {/* Clock icon */}
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" strokeWidth="2">
           <circle cx="12" cy="12" r="10"/>
@@ -147,16 +47,16 @@ export default function WeatherMetrics({
       </div>
 
       {/* 2x2 grid */}
-      <div style={styles.grid}>
+      <div className="grid">
 
         {/* Wind Speed */}
-        <div style={styles.metric}>
-          <div style={styles.metricTop}>
-            <span style={styles.metricValue}>{windSpeedKt}</span>
-            <span style={styles.metricUnit}>kt</span>
+        <div className="metric">
+          <div className="metricTop">
+            <span className="metricValue">{windSpeedKt}</span>
+            <span className="metricUnit">kt</span>
           </div>
           {/* Label with wind icon */}
-          <div style={styles.metricLabel}>
+          <div className="metricLabel">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ba8a0" strokeWidth="2">
               <path d="M9.59 4.59A2 2 0 1 1 11 8H2"/>
               <path d="M12.42 19.42A2 2 0 1 0 14 16H2"/>
@@ -167,13 +67,13 @@ export default function WeatherMetrics({
         </div>
 
         {/* Gust */}
-        <div style={styles.metric}>
-          <div style={styles.metricTop}>
-            <span style={styles.metricValue}>{windGustKt}</span>
-            <span style={styles.metricUnit}>kt</span>
+        <div className="metric">
+          <div className="metricTop">
+            <span className="metricValue">{windGustKt}</span>
+            <span className="metricUnit">kt</span>
           </div>
           {/* Label with gust icon + Beaufort force */}
-          <div style={styles.metricLabel}>
+          <div className="metricLabel">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ba8a0" strokeWidth="2">
               <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/>
               <path d="M9.6 4.6A2 2 0 1 1 11 8H2"/>
@@ -181,16 +81,16 @@ export default function WeatherMetrics({
             </svg>
             Gust Info
             {/* Beaufort force shown next to label */}
-            <span style={styles.beaufortLabel}>
+            <span className="beaufortLabel">
               · F{getBeaufort(windGustKt)}
             </span>
           </div>
         </div>
 
         {/* Wind Direction */}
-        <div style={styles.metric}>
-          <div style={styles.metricTop}>
-            <span style={styles.directionValue}>{windDirLabel}</span>
+        <div className="metric">
+          <div className="metricTop">
+            <span className="directionValue">{windDirLabel}</span>
             {/* Arrow rotates to match wind direction degrees */}
             <svg
               width="22"
@@ -211,7 +111,7 @@ export default function WeatherMetrics({
             </svg>
           </div>
           {/* Label with compass icon */}
-          <div style={styles.metricLabel}>
+          <div className="metricLabel">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ba8a0" strokeWidth="2">
               <circle cx="12" cy="12" r="10"/>
               <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/>
@@ -221,13 +121,13 @@ export default function WeatherMetrics({
         </div>
 
         {/* Wave Height */}
-        <div style={styles.metric}>
-          <div style={styles.metricTop}>
-            <span style={styles.metricValue}>{waveHeight}</span>
-            <span style={styles.metricUnit}>m</span>
+        <div className="metric">
+          <div className="metricTop">
+            <span className="metricValue">{waveHeight}</span>
+            <span className="metricUnit">m</span>
           </div>
           {/* Label with wave icon */}
-          <div style={styles.metricLabel}>
+          <div className="metricLabel">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ba8a0" strokeWidth="2">
               <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/>
               <path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/>

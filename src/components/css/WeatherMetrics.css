@@ -1,0 +1,84 @@
+.card {
+    background: #ffffff;
+    border: 1px solid #e0d9d0;
+    border-radius: 14px;
+    padding: 16px;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    font-family: 'DM Sans', sans-serif;
+  }
+  
+  .lastUpdated {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.6875rem;
+    color: #9a9a9a;
+    margin-bottom: 12px;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #e0d9d0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .metric {
+    background: #ffffff;
+    padding: 16px 8px; /* Slightly reduced side padding to give text more room */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  
+  }
+  
+  .metricTop {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+
+  }
+  
+  .metricValue {
+    font-size: 1.625rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1;
+  }
+  
+  .metricUnit {
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: #6b6b6b;
+    align-self: flex-end;
+    margin-bottom: 3px;
+  }
+  
+  .metricLabel {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8125rem; /* Adjusted slightly so it fits beautifully */
+    color: #9a9a9a;
+    justify-content: center;
+    white-space: nowrap; /* Forces text to stay on a single line! */
+  }
+  
+  .directionValue {
+    font-size: 1.625rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1;
+    font-family: monospace;
+  }
+  
+  .beaufortLabel {
+    font-size: 0.8125rem;
+    color: #4ba8a0;
+    font-weight: 600;
+  }

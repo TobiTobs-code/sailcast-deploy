@@ -10,7 +10,7 @@ export default function Dashboard({
   currentWeather,
   forecastData,
   tidalHeight,
-  fullTidalData, // <-- RESTORED: Catch the full array from App.jsx
+  fullTidalData,
   windspeed,
   gustspeed,
   visibility,
@@ -20,7 +20,7 @@ export default function Dashboard({
   BackToHome
 }) {
   const [city, setCity] = useState('')
-  const [selectedDate, setSelectedDate] = useState(null) // <-- RESTORED: Track clicked days
+  const [selectedDate, setSelectedDate] = useState(null)
 
   const getWindDirLabel = (deg) => {
     const dirs = ['N','NE','E','SE','S','SW','W','NW']
@@ -30,24 +30,31 @@ export default function Dashboard({
   const handleSearchClick = () => {
     if (onSearch) {
       onSearch(city)
-      setSelectedDate(null) // Reset back to today on new search
+      setSelectedDate(null) 
     }
   }
 
   return (
-      <div className="dashboard">
+    <div className="dashboard">
 
       <div className="dashboard-header">
         <h1 className="dashboard-title"
-        onClick={BackToHome}
-        style={{cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px'}}>
-          <img src={boatIcon} alt="SailCast Icon" style={{ width: '32px', height: '32px' }} /> 
+          onClick={BackToHome}
+          style={{
+            cursor: 'pointer', 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '12px',
+            fontFamily: "'Cedarville Cursive', cursive", // <-- Cedarville Cursive applied!
+            fontSize: '2.5rem',
+            margin: '0'
+          }}>
+          <img src={boatIcon} alt="SailCast Icon" style={{ width: '40px', height: '40px' }} /> 
           SailCast
         </h1>
       </div>
-      
      
-      {/* SEARCH BAR always visible */}
+      {/* SEARCH BAR */}
       <div className="searchBar">
         <button className="hamburgerBtn" onClick={onMenuOpen}>
           <span className="hamburgerLine" />
@@ -71,7 +78,6 @@ export default function Dashboard({
         <button onClick={handleSearchClick}>Search</button>
       </div>
 
-      {/* Weather card only if data exists */}
       {currentWeather && (
         <div className="weather-card">
           <div className="weather-card-top">
@@ -88,7 +94,6 @@ export default function Dashboard({
         </div>
       )}
 
-      {/* Main dashboard only if data exists */}
       {currentWeather && (
         <div className="dashboard-main">
           <div className="left-panel">
@@ -99,7 +104,6 @@ export default function Dashboard({
               windDeg={currentWeather?.wind?.deg ?? 0}
               waveHeight={tidalHeight ?? 'N/A'}
             />
-
             <SafetyStatus
               windspeed={windspeed}
               gustspeed={gustspeed}
@@ -111,7 +115,6 @@ export default function Dashboard({
           <div className="right-panel">
             <div className="forecast-section">
               <div className="forecast-graph">
-                {/* RESTORED: Passing the marine data and clicked day state */}
                 <WeatherGraph 
                   forecastData={forecastData} 
                   marineData={fullTidalData}
@@ -120,7 +123,6 @@ export default function Dashboard({
               </div>
 
               <div className="forecast-week">
-                {/* RESTORED: Passing the click events so the days highlight properly */}
                 <WeekForecast 
                   forecastData={forecastData} 
                   selectedDate={selectedDate}
@@ -131,14 +133,8 @@ export default function Dashboard({
           </div>
         </div>
       )}
-
-      {/* Tidal info */}
-      {currentWeather && (
-        <p className="tidal-info">
-          Tidal Height: {tidalHeight !== null ? `${tidalHeight} m` : 'Not available'}
-        </p>
-      )}
-
+      
+      {/* Tidal Height text explicitly removed from here! */}
     </div>
   )
 }
