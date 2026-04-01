@@ -1,10 +1,62 @@
 /* WeatherGraph.css
- Styles for the WeatherGraph component, including the tab bar, bar graph, and line graph styles
+ Styles for the WeatherGraph component, including the tab bar, bar graph, line graph styles, and info panel
 */
 .weatherGraph { display: flex; flex-direction: column; gap: 30px; }
+
+/* Wrapper for tabs and info button */
+.wg-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
 .graphTabBar { padding-top: 15px; font-size: 1.25rem; display: flex; gap: 10px; }
 .graphTab { background: none; border: none; cursor: pointer; color: #333; font-size: 1.25rem; }
 .graphTabActive { font-weight: 700; text-decoration: underline; }
+
+/* Info Button styling */
+.wg-info-btn { 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  color: #9a9a9a; 
+  padding: 0; 
+  margin-bottom: 4px;
+  display: flex; 
+  align-items: center; 
+  transition: color 0.15s ease; 
+}
+.wg-info-btn:hover { color: #4ba8a0; }
+
+/* The dropdown info panel */
+.wg-info-panel {
+  background: #f7f4ef;
+  border: 1px solid #e0d9d0;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-top: -15px;
+  margin-bottom: -10px;
+}
+.wg-info-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #2b2b2b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 8px 0;
+}
+.wg-info-list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 0.75rem;
+  color: #6b6b6b;
+  line-height: 1.6;
+}
+.wg-info-list li {
+  margin-bottom: 6px;
+}
+
+/* Graph Areas */
 .barGraph { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 1px; background: #E5E4D8; height: 120px; }
 .barCol { display: flex; flex-direction: column; align-items: center; flex: 1; }
 .barValueLabel { font-size: 0.6875rem; margin-bottom: 4px; }
