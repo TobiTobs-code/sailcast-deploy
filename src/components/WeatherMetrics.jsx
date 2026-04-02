@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './css/WeatherMetrics.css';
 
-//This is the wind/gust/direction/tide grid
+//This is the wind/gust/direction/wave height grid
 export default function WeatherMetrics({ 
   windSpeedKt, 
   windGustKt, 
