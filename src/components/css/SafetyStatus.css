@@ -2,35 +2,172 @@
  This styles the SafetyStatus component, including the card layout, 
  status colors, labels, and breakdown details
 */
-.safety-status-card { 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
+
+.safety-status-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     flex: 1;
-    max-width: 320px; 
-    border-radius: 20px; 
-    padding: 15px; 
-    border: 2px solid #4caf50; 
-    background: #dfeee2; 
-}
-.safe-status { border-color: #4caf50; background: #dfeee2; border-width:4px; }
-.caution-status { border-color: #e6a817; background: #f4ead2; border-width:4px;}
-.unsafe-status { border-color: #d9534f; background: #f4d6d5;border-width:4px; }
-.notcoastal-status { border-color: #6c757d; background: #f0efeac1; }
-.st-label { display: flex; align-items: center; gap: 8px; font-weight: 600; margin-bottom: 6px; }
-.st-dot { width: 10px; height: 10px; border-radius: 50%; }
-.st-title { font-size: 0.8125rem; opacity: 0.7; }
-.safe-status .st-word { color: #2f7a3e; text-transform: uppercase; font-size: 0.625rem; margin-left: auto; border: 1.5px solid #3fae60; padding: 1px 8px; border-radius: 20px; }
-.caution-status .st-word { color: #c3861c; text-transform: uppercase; font-size: 0.625rem; margin-left: auto; border: 1.5px solid #e6a817; padding: 1px 8px; border-radius: 20px; }
-.unsafe-status .st-word { color: #a94442; text-transform: uppercase; font-size: 0.625rem; margin-left: auto; border: 1.5px solid #b52d2d; padding: 1px 8px; border-radius: 20px; }
-.notcoastal-status .st-word { color: #5a6268; text-transform: uppercase; font-size: 0.625rem; margin-left: auto; border: 1.5px solid #6c757d; padding: 1px 8px; border-radius: 20px; }
-.st-message { font-size: 0.75rem; line-height: 1.4; opacity: 0.85; }
-.st-info-btn { background: none; border: none; cursor: pointer; color: inherit; padding: 0; margin-left: 4px; display: flex; align-items: center; opacity: 0.6; transition: opacity 0.15s ease; }
-.st-info-btn:hover { opacity: 1; }
-.st-breakdown { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 6px; }
-.st-breakdown-title { font-size: 0.6875rem; font-weight: 700; color: #6b6b6b; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 4px 0; }
-.st-breakdown-row { display: flex; align-items: center; gap: 8px; font-size: 0.6875rem; }
-.st-breakdown-label { color: #6b6b6b; min-width: 80px; font-weight: 500; }
-.st-breakdown-value { color: #2b2b2b; font-weight: 600; min-width: 50px; font-family: monospace; }
-.st-breakdown-result { color: #6b6b6b; flex: 1; }
-.st-breakdown-note { font-size: 0.625rem; color: #9a9a9a; line-height: 1.5; margin: 4px 0 0 0; padding-top: 6px; border-top: 1px solid rgba(0,0,0,0.06); }
+    max-width: 320px;
+    border-radius: 20px;
+    padding: 15px;
+    border: 2px solid #4caf50;
+    background: #dfeee2;
+  }
+  
+  .safe-status {
+    border-color: #4caf50;
+    background: #dfeee2;
+    border-width: 4px;
+  }
+  
+  .caution-status {
+    border-color: #e6a817;
+    background: #f4ead2;
+    border-width: 4px;
+  }
+  
+  .unsafe-status {
+    border-color: #d9534f;
+    background: #f4d6d5;
+    border-width: 4px;
+  }
+  
+  .notcoastal-status {
+    border-color: #6c757d;
+    background: #f0efeac1;
+  }
+  
+  .st-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  
+  .st-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  
+  .st-title {
+    font-size: 0.8125rem;
+    opacity: 0.7;
+  }
+  
+  .safe-status .st-word {
+    color: #2f7a3e;
+    text-transform: uppercase;
+    font-size: 0.625rem;
+    margin-left: auto;
+    border: 1.5px solid #3fae60;
+    padding: 1px 8px;
+    border-radius: 20px;
+  }
+  
+  .caution-status .st-word {
+    color: #c3861c;
+    text-transform: uppercase;
+    font-size: 0.625rem;
+    margin-left: auto;
+    border: 1.5px solid #e6a817;
+    padding: 1px 8px;
+    border-radius: 20px;
+  }
+  
+  .unsafe-status .st-word {
+    color: #a94442;
+    text-transform: uppercase;
+    font-size: 0.625rem;
+    margin-left: auto;
+    border: 1.5px solid #b52d2d;
+    padding: 1px 8px;
+    border-radius: 20px;
+  }
+  
+  .notcoastal-status .st-word {
+    color: #5a6268;
+    text-transform: uppercase;
+    font-size: 0.625rem;
+    margin-left: auto;
+    border: 1.5px solid #6c757d;
+    padding: 1px 8px;
+    border-radius: 20px;
+  }
+  
+  .st-message {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    opacity: 0.85;
+  }
+  
+  .st-info-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    padding: 0;
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+    opacity: 0.6;
+    transition: opacity 0.15s ease;
+  }
+  
+  .st-info-btn:hover {
+    opacity: 1;
+  }
+  
+  .st-breakdown {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .st-breakdown-title {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: #6b6b6b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 4px 0;
+  }
+  
+  .st-breakdown-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.6875rem;
+  }
+  
+  .st-breakdown-label {
+    color: #6b6b6b;
+    min-width: 80px;
+    font-weight: 500;
+  }
+  
+  .st-breakdown-value {
+    color: #2b2b2b;
+    font-weight: 600;
+    min-width: 50px;
+    font-family: monospace;
+  }
+  
+  .st-breakdown-result {
+    color: #6b6b6b;
+    flex: 1;
+  }
+  
+  .st-breakdown-note {
+    font-size: 0.625rem;
+    color: #9a9a9a;
+    line-height: 1.5;
+    margin: 4px 0 0 0;
+    padding-top: 6px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }

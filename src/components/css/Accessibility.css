@@ -1,12 +1,76 @@
-/* Styles for Accessibility component */
-.accessibility { display: flex; flex-direction: column; gap: 12px; }
-.accessibilityGroup { display: flex; flex-direction: column; gap: 6px; }
-.accessibilityLabel { font-size: 0.8125rem; font-weight: 600; color: #2b2b2b; margin: 0; }
-.accessibilityHint { font-size: 0.6875rem; color: #9a9a9a; margin: 0 0 6px 0; }
-.experienceBtn { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 12px; border: 1px solid #e0d9d0; border-radius: 10px; background: #f7f4ef; cursor: pointer; text-align: left; font-family: "Inter", sans-serif; transition: all 0.15s ease; }
-.experienceBtn:hover { border-color: #4ba8a0; }
-.experienceBtnActive { border-color: #4ba8a0; background: #eef7f6; }
-.experienceBtnLabel { font-size: 0.8125rem; font-weight: 600; color: #2b2b2b; min-width: 90px; }
-.experienceBtnDesc { font-size: 0.6875rem; color: #9a9a9a; flex: 1; }
-.experienceBtnTick { color: #4ba8a0; font-weight: 700; }
-.accessibilityFooter { font-size: 0.6875rem; color: #9a9a9a; margin: 0; }
+/* Accessibility.css
+ Styles for the Accessibility component, including user experience preference buttons and settings
+*/
+
+.accessibility {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .accessibilityGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .accessibilityLabel {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #2b2b2b;
+    margin: 0;
+  }
+  
+  .accessibilityHint {
+    font-size: 0.6875rem;
+    color: #9a9a9a;
+    margin: 0 0 6px 0;
+  }
+  
+  .experienceBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e0d9d0;
+    border-radius: 10px;
+    background: #f7f4ef;
+    cursor: pointer;
+    text-align: left;
+    font-family: "Inter", sans-serif;
+    transition: all 0.15s ease;
+  }
+  
+  .experienceBtn:hover {
+    border-color: #4ba8a0;
+  }
+  
+  .experienceBtnActive {
+    border-color: #4ba8a0;
+    background: #eef7f6;
+  }
+  
+  .experienceBtnLabel {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #2b2b2b;
+    min-width: 90px;
+  }
+  
+  .experienceBtnDesc {
+    font-size: 0.6875rem;
+    color: #9a9a9a;
+    flex: 1;
+  }
+  
+  .experienceBtnTick {
+    color: #4ba8a0;
+    font-weight: 700;
+  }
+  
+  .accessibilityFooter {
+    font-size: 0.6875rem;
+    color: #9a9a9a;
+    margin: 0;
+  }
