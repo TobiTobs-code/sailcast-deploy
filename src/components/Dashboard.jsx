@@ -75,7 +75,7 @@ export default function Dashboard({
         opacity: 0.7
       }}
     >
-      Forecasting the Sea, Simplifying Your Sail.
+      Weather just for Jojo ❤️
     </h2>
 
   </div>
