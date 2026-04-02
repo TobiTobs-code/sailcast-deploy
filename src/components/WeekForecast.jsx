@@ -3,7 +3,7 @@ import './css/WeekForecast.css';
 
 /*
 Displays week forecast
-Displays a 7-day forecast with daily summaries. Each day is clickable to select it for detailed view in the WeatherMetrics component.
+Displays a 5-day forecast with daily summaries. Each day is clickable to select it for detailed view in the WeatherMetrics component.
 */
 export default function WeekForecast({ forecastData, selectedDate, onSelectDay }) {
     if (!forecastData?.list) return null;
