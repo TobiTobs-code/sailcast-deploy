@@ -6,7 +6,6 @@ import MapPage from './components/MapPage';
 import PopUp from './components/PopUp';
 import { fetchCurrentWeather, fetchForecast } from './api/weather';
 import { fetchTidalData } from './api/marine';
-import boatIcon from './components/assets/icons8-boat-64.svg';
 
 // Main App component managing state, data fetching, and page navigation.
 
@@ -57,7 +56,7 @@ function App() {
         setTidalHeight(null);
       }
 
-      // Windy embeded URL using the location coordinates
+      // Windy embedded URL using the location coordinates
       setWindyUrl(
         `https://embed.windy.com/embed2.html?lat=${lat}&lon=${lon}&zoom=10&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=${lat}&detailLon=${lon}&metricWind=kt&metricTemp=°C&radarRange=-1`
       )
@@ -74,14 +73,6 @@ function App() {
     finally {
       setLoading(false);
     }
-  }
-
-  async function handleHomePage() {
-    setCurrentWeather(null);
-    setForecastData(null);
-    setTidalHeight(null);
-    setCity('');
-    setPage('home');
   }
 
   /* WRAPPER FUNCTIONS FOR POPUP
