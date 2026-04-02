@@ -14,6 +14,16 @@
     align-items: center; 
     font-size: 0.6875rem; 
     flex: 1; 
+    
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 8px 4px;
+    background: transparent;
+    transition: background 0.2s ease;
+}
+
+.weekDayActive {
+    background: rgba(75, 168, 160, 0.15);
 }
 
 .weekDayLabel { 

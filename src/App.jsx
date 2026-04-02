@@ -63,7 +63,7 @@ function App() {
       )
 
       setCity(searchCity);
-      setPage('dashboard'); // Ensure we return to the dashboard after a search
+      setPage('dashboard');
     } 
     catch (err) {
       setError(err.message);
@@ -84,7 +84,13 @@ function App() {
     setPage('home');
   }
 
-  // --- WRAPPER FUNCTIONS FOR POPUP ---
+  /* WRAPPER FUNCTIONS FOR POPUP
+  Reasoning: Because this app provides critical safety information for sailing, 
+  we must ensure the user acknowledges that this is a guidance tool only. 
+  These wrappers intercept UI interactions (Search/Menu) and force the legal 
+  disclaimer popup to appear first if they haven't accepted it yet.
+  */
+
   function handleSearchWithPopup(searchCity) {
     if (!hasAccepted) {
       setShowPopup(true);
@@ -153,7 +159,7 @@ function App() {
         <Sidebar
           isOpen={sidebarOpen}
           onClose={() => setSidebarOpen(false)}
-          onSearch={handleSearchWithPopup} // Uses popup wrapper
+          onSearch={handleSearchWithPopup}
           onFontSizeChange={(size) => {
             document.documentElement.style.fontSize = size
           }}
@@ -172,8 +178,8 @@ function App() {
           gustspeed={gustspeed}
           visibility={visibility}
           
-          onSearch={handleSearchWithPopup} // Uses popup wrapper
-          onMenuOpen={handleSidebarWithPopup} // Uses popup wrapper
+          onSearch={handleSearchWithPopup} 
+          onMenuOpen={handleSidebarWithPopup} 
           
           onMapOpen={() => setPage('map')}
           BackToHome={handleHomePage}

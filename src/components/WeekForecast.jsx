@@ -1,8 +1,10 @@
 import React from 'react';
 import './css/WeekForecast.css';
 
-// Displays a 7-day forecast with daily summaries. Each day is clickable to select it for detailed 
-//view in the WeatherMetrics component.
+/*
+Displays week forecast
+Displays a 7-day forecast with daily summaries. Each day is clickable to select it for detailed view in the WeatherMetrics component.
+*/
 export default function WeekForecast({ forecastData, selectedDate, onSelectDay }) {
     if (!forecastData?.list) return null;
 
@@ -24,7 +26,7 @@ export default function WeekForecast({ forecastData, selectedDate, onSelectDay }
 
             const date = new Date(dateStr + 'T12:00:00Z');
             return {
-                dateStr, // ADDED: So we know what day this is when clicked
+                dateStr, 
                 dayLabel: date.toLocaleDateString('en-GB', { weekday: 'short' }).toUpperCase(),
                 temp: Math.round(noon.main.temp),
                 icon: noon.weather[0].icon,
@@ -43,16 +45,8 @@ export default function WeekForecast({ forecastData, selectedDate, onSelectDay }
                 return (
                     <div 
                         key={i} 
-                        className="weekDay"
+                        className={`weekDay ${isSelected ? 'weekDayActive' : ''}`}
                         onClick={() => onSelectDay(d.dateStr)}
-                        // ADDED: Styling to make it look clickable and highlight the chosen day
-                        style={{ 
-                            cursor: 'pointer', 
-                            background: isSelected ? 'rgba(75, 168, 160, 0.15)' : 'transparent',
-                            borderRadius: '12px',
-                            padding: '8px 4px',
-                            transition: 'background 0.2s'
-                        }}
                     >
                         <span className="weekDayLabel">{d.dayLabel}</span>
                         <img

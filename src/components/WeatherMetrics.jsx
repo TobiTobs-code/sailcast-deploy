@@ -1,7 +1,7 @@
-//the wind/gust/direction/tide grid
 import { useState } from 'react';
 import './css/WeatherMetrics.css';
 
+//This is the wind/gust/direction/tide grid
 export default function WeatherMetrics({ 
   windSpeedKt, 
   windGustKt, 
@@ -10,7 +10,13 @@ export default function WeatherMetrics({
   waveHeight
 }) {
 
-  // ── Beaufort scale calculation ────────────────────────────────
+  /*
+  Beaufort scale calculation
+    Reasoning: Standard weather APIs provide wind in m/s or raw knots. 
+    However, our primary stakeholders (UK Coastal Sailors) rely heavily on the 
+    Beaufort Wind Force Scale (F0-F12) for maritime navigation and safety warnings. 
+    This function maps raw knots to the official Beaufort scale.
+  */ 
   const getBeaufort = (kt) => {
     if (kt < 1)  return 0
     if (kt < 4)  return 1

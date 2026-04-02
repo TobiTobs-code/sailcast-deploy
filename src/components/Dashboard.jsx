@@ -35,7 +35,7 @@ export default function Dashboard({
     }
   }
 
-  // Dashboard layout with header, search bar, current weather card, 
+// Dashboard layout with header, search bar, current weather card, 
  //and main content area for metrics and forecast
   return (
 <div className="dashboard">
@@ -161,8 +161,6 @@ export default function Dashboard({
           </div>
         </div>
       )}
-      
-      {/* Tidal Height text explicitly removed from here! */}
     </div>
   )
 }

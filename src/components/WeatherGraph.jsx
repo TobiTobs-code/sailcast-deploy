@@ -138,22 +138,20 @@ function LineGraph({ data }) {
 // --- Main WeatherGraph Component ---
 export default function WeatherGraph({ forecastData, marineData, selectedDate }) {
     const [activeTab, setActiveTab] = useState('wind');
-    const [showInfo, setShowInfo] = useState(false); // ADDED: Toggle state for the info card
+    const [showInfo, setShowInfo] = useState(false);
 
     const graphData = useMemo(() => {
         if (!forecastData?.list) return [];
 
-        // Find out current day based on the first item in the forecast array
         const todayStr = new Date(forecastData.list[0].dt * 1000).toISOString().slice(0, 10);
         const targetDate = selectedDate || todayStr;
         
         let slots = [];
 
-        // Grab the next 8 slots (24 hours) for current day
         if (targetDate === todayStr) {
             slots = forecastData.list.slice(0, 8);
         } else {
-            // Future date selected — filter forecast list to matching date, cap at 8 slots (24hrs)
+            
             slots = forecastData.list.filter(s => {
                 const slotDate = new Date(s.dt * 1000).toISOString().slice(0, 10);
                 return slotDate === targetDate;
@@ -167,7 +165,12 @@ export default function WeatherGraph({ forecastData, marineData, selectedDate })
             const windKt = Math.round(s.wind.speed * 1.94384);
             const gustKt = s.wind.gust ? Math.round(s.wind.gust * 1.94384) : windKt;
             const visKm = (s.visibility ?? 10000) / 1000;
-            
+
+            // Reasoning: OpenWeather returns data in 3-hour blocks, while Open-Meteo 
+            // marine data is hourly. To align them for the UI, we format the OpenWeather 
+            // timestamp to an ISO hour string (YYYY-MM-DDTHH) and search the Open-Meteo 
+            // array for the exact matching hour to extract the correct wave height.
+        
             const owIsoHour = new Date(s.dt * 1000).toISOString().slice(0, 14);
             let waveHeight = null;
             if (marineData?.time) {

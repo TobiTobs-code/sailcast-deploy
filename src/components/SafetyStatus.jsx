@@ -15,7 +15,7 @@ export function getSafetyStatus({windspeed, gustspeed, visibility, tidalHeight})
     let weatherscore = 0;
 
     if(tidalHeight == null) {
-        return 'NotCoastal'; //Return NotCoastal if any of the parameters are null
+        return 'NotCoastal'; 
     }
 
     //Wind speed(knots) scoring
@@ -40,7 +40,7 @@ export function getSafetyStatus({windspeed, gustspeed, visibility, tidalHeight})
     }
 
     if(windspeed > 30 || gustspeed > 30 || visibility < 1) {
-        weatherscore = -1; // Override to unsafe if any condition is in the unsafe range
+        weatherscore = -1; //overrride
     }
     
     //Visibility scoring
@@ -141,7 +141,7 @@ function getBreakdown(windspeed, gustspeed, visibility, tidalHeight) {
         NotCoastal : {
             label : 'Not Coastal',
             message:
-            "Safety status is only available for coastal locations. Suggestion: Try searching for a coastal location such as a UK harbour or marina to get safety status information.",
+            "Safety status is only available for coastal locations. Suggestion: Try searching for a UK coastal location such as a harbour or marina. If you believe this is a coastal area, this may be caused by the resolution limits of the Open-Meteo marine API.",
             bordercolor : "#6c757d",
             labelcolor : "#5a6268",
             dot: "#6c757d",
@@ -151,7 +151,7 @@ function getBreakdown(windspeed, gustspeed, visibility, tidalHeight) {
 }
 
 // The main component that renders the safety status card on the screen. It takes the weather information 
-//  and uses the getSafetyStatus function to determine the safety status. The card is styled based on the 
+// and uses the getSafetyStatus function to determine the safety status. The card is styled based on the 
 // status and displays a message to the user.
 export default function SafetyStatus({windspeed, gustspeed, visibility, tidalHeight}) {
     const safetyStatus = getSafetyStatus({windspeed, gustspeed, visibility, tidalHeight});
@@ -160,7 +160,6 @@ export default function SafetyStatus({windspeed, gustspeed, visibility, tidalHei
     const [showInfo, setShowInfo] = useState(false)
     const breakdown = getBreakdown(windspeed, gustspeed, visibility, tidalHeight)
 
-    
     return(
         <div className={`safety-status-card ${st.className}`}>
            <div className = "st-label" style={{color: st.labelcolor}}>

@@ -16,7 +16,9 @@ body {
   margin: 0 auto;
 }
 
-/* SEARCH BAR (Used in both App.jsx and Dashboard.jsx) */
+/* 
+SEARCH BAR (Used in both App.jsx and Dashboard.jsx) 
+*/
 .searchBar {
   width: 900px;
   height: 40px;
