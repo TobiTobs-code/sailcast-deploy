@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SafetyStatus from './SafetyStatus'
 import WeatherGraph from './WeatherGraph'
 import WeekForecast from './WeekForecast'
@@ -24,6 +24,8 @@ export default function Dashboard({
   const [motivationMessage, setMotivationMessage] = useState('')
   const [xoActive, setXoActive] = useState(false)
 
+  const hasLoadedDefaultCity = useRef(false)
+
   useEffect(() => {
     const now = new Date()
     const isTestPeriod =
@@ -37,16 +39,19 @@ export default function Dashboard({
   }, [])
 
   useEffect(() => {
-    if (onSearch) {
-      onSearch('Białystok')
-    }
+    if (!onSearch || hasLoadedDefaultCity.current) return
+
+    hasLoadedDefaultCity.current = true
+    onSearch('Białystok')
   }, [onSearch])
 
   const handleSearchClick = () => {
-    if (onSearch && city.trim()) {
-      onSearch(city)
-      setSelectedDate(null)
-    }
+    const searchedCity = city.trim()
+
+    if (!searchedCity || !onSearch) return
+
+    onSearch(searchedCity)
+    setSelectedDate(null)
   }
 
   const handleMotivationClick = () => {
@@ -66,15 +71,14 @@ export default function Dashboard({
   }
 
   const getCityDateTime = () => {
-    if (!currentWeather?.timezone) {
+    if (currentWeather?.timezone === undefined) {
       return {
         time: '--:--',
         date: ''
       }
     }
 
-    const nowUtcMs = Date.now() + new Date().getTimezoneOffset() * 60000
-    const cityMs = nowUtcMs + currentWeather.timezone * 1000
+    const cityMs = Date.now() + currentWeather.timezone * 1000
     const cityDate = new Date(cityMs)
 
     return {
@@ -109,41 +113,17 @@ export default function Dashboard({
         </>
       )}
 
-      <div
-        className="dashboard-header"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '16px'
-        }}
-      >
-        <h1
-          className="dashboard-title"
-          onClick={BackToHome}
-          style={{
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            fontFamily: "'Cedarville Cursive', cursive",
-            fontSize: '2.5rem',
-            margin: '0'
-          }}
-        >
-          <img src={boatIcon} alt="SailCast Icon" style={{ width: '40px', height: '40px' }} />
+      <div className="dashboard-header">
+        <h1 className="dashboard-title" onClick={BackToHome}>
+          <img
+            src={boatIcon}
+            alt="SailCast Icon"
+            style={{ width: '40px', height: '40px' }}
+          />
           SailCast
         </h1>
 
-        <h2
-          className="dashboard-tagline"
-          style={{
-            fontWeight: 500,
-            fontFamily: "'Poppins', sans-serif",
-            fontSize: '0.8rem',
-            marginTop: '30px',
-            opacity: 0.7
-          }}
-        >
+        <h2 className="dashboard-tagline">
           Weather just for Jojo ❤️
         </h2>
       </div>
@@ -168,11 +148,7 @@ export default function Dashboard({
         </button>
 
         <button className="mapBtn" onClick={onMapOpen} title="View wind map">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/>
-            <path d="M15 5.764v15"/>
-            <path d="M9 3.236v15"/>
-          </svg>
+          🗺️
         </button>
 
         <input
