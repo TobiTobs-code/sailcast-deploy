@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SafetyStatus from './SafetyStatus'
 import WeatherGraph from './WeatherGraph'
 import WeekForecast from './WeekForecast'
@@ -19,52 +19,32 @@ export default function Dashboard({
   onMapOpen,
   BackToHome
 }) {
-  const defaultCity = 'Białystok'
-
-  const [city, setCity] = useState(defaultCity)
+  const [city, setCity] = useState('Białystok')
   const [selectedDate, setSelectedDate] = useState(null)
   const [motivationMessage, setMotivationMessage] = useState('')
-  const [requestedCity, setRequestedCity] = useState(defaultCity)
-  const [xoVisible, setXoVisible] = useState(false)
-
-  const now = new Date()
-  const showTestMessageByDate =
-    now.getFullYear() === 2026 &&
-    now.getMonth() === 3 &&
-    (now.getDate() === 15 || now.getDate() === 16)
+  const [xoActive, setXoActive] = useState(false)
 
   useEffect(() => {
-    setMotivationMessage(showTestMessageByDate ? 'good luck with your test babe' : '')
-  }, [showTestMessageByDate])
+    const now = new Date()
+    const isTestPeriod =
+      now.getFullYear() === 2026 &&
+      now.getMonth() === 3 &&
+      (now.getDate() === 15 || now.getDate() === 16)
+
+    if (isTestPeriod) {
+      setMotivationMessage('good luck with your test babe')
+    }
+  }, [])
 
   useEffect(() => {
     if (onSearch) {
-      onSearch(defaultCity)
-      setRequestedCity(defaultCity)
+      onSearch('Białystok')
     }
   }, [onSearch])
-
-  const normalizeText = (value) =>
-    (value || '')
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .trim()
-
-  const currentWeatherMatchesRequestedCity = useMemo(() => {
-    if (!currentWeather?.name) return false
-    return normalizeText(currentWeather.name) === normalizeText(requestedCity)
-  }, [currentWeather, requestedCity])
-
-  const getWindDirLabel = (deg) => {
-    const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
-    return dirs[Math.round(deg / 45) % 8]
-  }
 
   const handleSearchClick = () => {
     if (onSearch && city.trim()) {
       onSearch(city)
-      setRequestedCity(city)
       setSelectedDate(null)
     }
   }
@@ -76,60 +56,94 @@ export default function Dashboard({
         : 'good luck with your test babe'
     )
 
-    setXoVisible(true)
-    setTimeout(() => {
-      setXoVisible(false)
-    }, 2000)
+    setXoActive(true)
+    setTimeout(() => setXoActive(false), 2000)
   }
 
-  const timezoneOffsetSeconds = currentWeather?.timezone ?? 0
-  const utcNowMs = Date.now() + new Date().getTimezoneOffset() * 60000
-  const cityNow = new Date(utcNowMs + timezoneOffsetSeconds * 1000)
+  const getWindDirLabel = (deg) => {
+    const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
+    return dirs[Math.round(deg / 45) % 8]
+  }
 
-  const formattedLocalTime = currentWeatherMatchesRequestedCity
-    ? new Intl.DateTimeFormat('en-GB', {
+  const getCityDateTime = () => {
+    if (!currentWeather?.timezone) {
+      return {
+        time: '--:--',
+        date: ''
+      }
+    }
+
+    const nowUtcMs = Date.now() + new Date().getTimezoneOffset() * 60000
+    const cityMs = nowUtcMs + currentWeather.timezone * 1000
+    const cityDate = new Date(cityMs)
+
+    return {
+      time: cityDate.toLocaleTimeString('en-GB', {
         hour: '2-digit',
         minute: '2-digit',
         hour12: false,
         timeZone: 'UTC'
-      }).format(cityNow)
-    : '--:--'
-
-  const formattedLocalDate = currentWeatherMatchesRequestedCity
-    ? new Intl.DateTimeFormat('en-GB', {
+      }),
+      date: cityDate.toLocaleDateString('en-GB', {
         weekday: 'long',
         day: 'numeric',
         month: 'long',
         year: 'numeric',
         timeZone: 'UTC'
-      }).format(cityNow)
-    : ''
+      })
+    }
+  }
+
+  const { time: localTime, date: localDate } = getCityDateTime()
 
   return (
     <div className="dashboard">
-      {xoVisible && (
+      {xoActive && (
         <>
-          <span className="jojo-xo" style={{ top: '18%', left: '22%' }}>XO</span>
-          <span className="jojo-xo" style={{ top: '18%', left: '50%' }}>XO</span>
-          <span className="jojo-xo" style={{ top: '18%', left: '78%' }}>XO</span>
-          <span className="jojo-xo" style={{ top: '32%', left: '34%' }}>XO</span>
-          <span className="jojo-xo" style={{ top: '32%', left: '66%' }}>XO</span>
-          <span className="jojo-xo" style={{ top: '46%', left: '24%' }}>XO</span>
-          <span className="jojo-xo" style={{ top: '46%', left: '50%' }}>XO</span>
-          <span className="jojo-xo" style={{ top: '46%', left: '76%' }}>XO</span>
+          <span className="jojo-xo xo-1">XO</span>
+          <span className="jojo-xo xo-2">XO</span>
+          <span className="jojo-xo xo-3">XO</span>
+          <span className="jojo-xo xo-4">XO</span>
+          <span className="jojo-xo xo-5">XO</span>
+          <span className="jojo-xo xo-6">XO</span>
         </>
       )}
 
-      <div className="dashboard-header">
+      <div
+        className="dashboard-header"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '16px'
+        }}
+      >
         <h1
           className="dashboard-title"
           onClick={BackToHome}
+          style={{
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            fontFamily: "'Cedarville Cursive', cursive",
+            fontSize: '2.5rem',
+            margin: '0'
+          }}
         >
-          <img src={boatIcon} alt="SailCast Icon" className="dashboard-title-icon" />
+          <img src={boatIcon} alt="SailCast Icon" style={{ width: '40px', height: '40px' }} />
           SailCast
         </h1>
 
-        <h2 className="dashboard-tagline">
+        <h2
+          className="dashboard-tagline"
+          style={{
+            fontWeight: 500,
+            fontFamily: "'Poppins', sans-serif",
+            fontSize: '0.8rem',
+            marginTop: '30px',
+            opacity: 0.7
+          }}
+        >
           Weather just for Jojo ❤️
         </h2>
       </div>
@@ -141,10 +155,7 @@ export default function Dashboard({
           )}
         </div>
 
-        <button
-          className="motivation-button"
-          onClick={handleMotivationClick}
-        >
+        <button className="motivation-button" onClick={handleMotivationClick}>
           Tap for motivation 😝
         </button>
       </div>
@@ -175,7 +186,7 @@ export default function Dashboard({
         <button onClick={handleSearchClick}>Search</button>
       </div>
 
-      {currentWeatherMatchesRequestedCity && (
+      {currentWeather && (
         <div className="weather-card">
           <div className="weather-card-top">
             <div className="weather-card-left">
@@ -184,14 +195,14 @@ export default function Dashboard({
             </div>
 
             <div className="weather-card-right">
-              <h3>{formattedLocalTime}</h3>
-              <p>{formattedLocalDate}</p>
+              <h3>{localTime}</h3>
+              <p>{localDate}</p>
             </div>
           </div>
         </div>
       )}
 
-      {currentWeatherMatchesRequestedCity && (
+      {currentWeather && (
         <div className="dashboard-main">
           <div className="left-panel">
             <WeatherMetrics
