@@ -22,6 +22,8 @@ export default function Dashboard({
 }) {
   const [city, setCity] = useState('')
   const [selectedDate, setSelectedDate] = useState(null)
+  const [motivation, setMotivation] = useState('')
+  const [xoBursts, setXoBursts] = useState([])
 
   const getWindDirLabel = (deg) => {
     const dirs = ['N','NE','E','SE','S','SW','W','NW']
@@ -35,51 +37,108 @@ export default function Dashboard({
     }
   }
 
-// Dashboard layout with header, search bar, current weather card, 
- //and main content area for metrics and forecast
+  const today = new Date()
+  const startDate = new Date('2026-04-15')
+  const endDate = new Date('2026-04-17')
+
+  const currentDateOnly = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  )
+
+  const tagline =
+    currentDateOnly >= startDate && currentDateOnly <= endDate
+      ? 'Good luck with your test babe ❤️'
+      : 'Weather just for Jojo ❤️'
+
+  const messages = [
+    "you've got this doc 👩🏾‍⚕️"
+  ]
+
+  const showMotivation = () => {
+    const randomIndex = Math.floor(Math.random() * messages.length)
+    setMotivation(messages[randomIndex])
+
+    const burst = Array.from({ length: 12 }, (_, i) => ({
+      id: Date.now() + i,
+      text: Math.random() > 0.5 ? 'XO' : 'OX',
+      left: `${Math.random() * 85 + 5}%`,
+      top: `${Math.random() * 70 + 10}%`,
+      delay: `${Math.random() * 0.4}s`
+    }))
+
+    setXoBursts(burst)
+
+    setTimeout(() => {
+      setXoBursts([])
+    }, 1800)
+  }
+
+// Dashboard layout with header, search bar, current weather card,
+// and main content area for metrics and forecast
   return (
-<div className="dashboard">
+    <div className="dashboard">
+      {xoBursts.map((item) => (
+        <span
+          key={item.id}
+          className="xo-burst"
+          style={{
+            left: item.left,
+            top: item.top,
+            animationDelay: item.delay
+          }}
+        >
+          {item.text}
+        </span>
+      ))}
 
-  <div
-    className="dashboard-header"
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: '16px'
-    }}
-  >
-    <h1
-      className="dashboard-title"
-      onClick={BackToHome}
-      style={{
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px',
-        fontFamily: "'Cedarville Cursive', cursive",
-        fontSize: '2.5rem',
-        margin: '0'
-      }}
-    >
-      <img src={boatIcon} alt="SailCast Icon" style={{ width: '40px', height: '40px' }} />
-      SailCast
-    </h1>
-    <h2
-      className="dashboard-tagline"
-      style={{
-        fontWeight: 500,
-        fontFamily: "'Poppins', sans-serif",
-        alignItems: 'center',
-        fontSize: '0.8rem',
-        marginTop: '30px',
-        opacity: 0.7
-      }}
-    >
-      Weather just for Jojo ❤️
-    </h2>
+      <div
+        className="dashboard-header"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '16px'
+        }}
+      >
+        <h1
+          className="dashboard-title"
+          onClick={BackToHome}
+          style={{
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            fontFamily: "'Cedarville Cursive', cursive",
+            fontSize: '2.5rem',
+            margin: '0'
+          }}
+        >
+          <img src={boatIcon} alt="SailCast Icon" style={{ width: '40px', height: '40px' }} />
+          SailCast
+        </h1>
 
-  </div>
+        <h2
+          className="dashboard-tagline"
+          style={{
+            fontWeight: 500,
+            fontFamily: "'Poppins', sans-serif",
+            alignItems: 'center',
+            fontSize: '0.8rem',
+            marginTop: '30px',
+            opacity: 0.7
+          }}
+        >
+          {tagline}
+        </h2>
+      </div>
 
+      <div className="jojo-motivation-wrap">
+        <button className="motivation-button" onClick={showMotivation}>
+          Tap for motivation ❤️
+        </button>
+        {motivation && <p className="motivation-message">{motivation}</p>}
+      </div>
 
       {/* SEARCH BAR */}
       {/* The search bar includes a hamburger menu button, a map button, an input field for city name, and a search button.*/}

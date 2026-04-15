@@ -1,57 +1,68 @@
-/* This styles the main dashboard layout, including the left and right panels, and the forecast section with the weather card and week forecast
-*/
-.dashboard { display: flex; flex-direction: column; gap: 20px; }
-.dashboard-main { display: flex; gap: 20px; }
-.left-panel { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; }
-.right-panel { flex: 2; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
-
-/* This styles the weather forecast section, including the header and layout of the weather graph and week forecast */
-.forecast-section {
-  background: #E5E4D8;
-  border-radius: 20px;
-  padding: 20px 24px;
+.jojo-motivation-wrap {
+  margin: 10px 0 18px 0;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
 }
 
-.forecast-week {
-  margin-top: 15px; 
+.motivation-button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #222;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
 }
 
-.weather-card {
-  min-height: 140px;
-  padding: 30px 24px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #5f9ea0 0%, #6ea8a1 40%, #9fc5c2 100%);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.motivation-button:hover {
+  transform: translateY(-1px);
 }
-.weather-card-top { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: flex-end; 
-    flex-direction: row; flex: 1; }
 
-.weather-card-left h2 { 
-    font-size: 4rem; 
-    font-weight: 600; 
-    margin: 0; 
-    letter-spacing: -1px; }
-    
-.weather-card-left p { 
-    font-size: 1.125rem; 
-    margin: 0; 
-    opacity: 0.9; }
+.motivation-message {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  animation: fadeInUp 0.35s ease;
+}
 
-.weather-card-right h3 { 
-    text-align: right; 
-    font-size: 1.5rem; 
-    opacity: 0.8; 
-    margin-left: 6px; 
-    margin: 0; }
-    
-.weather-card-right p { margin: 0; text-align: right; font-size: 0.875rem; opacity: 0.8; }
+.xo-burst {
+  position: fixed;
+  z-index: 999;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #d61f69;
+  pointer-events: none;
+  animation: floatXO 1.8s ease forwards;
+  text-shadow: 0 2px 10px rgba(214, 31, 105, 0.25);
+}
+
+@keyframes floatXO {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.8) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) scale(1.15) rotate(12deg);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
