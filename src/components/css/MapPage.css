@@ -92,3 +92,15 @@
   .mapPageBackBtn:hover {
     background: #2d7a74;
   }
+
+  .mapPageMusicBtn {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: white;
+  color: #222;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
