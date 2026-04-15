@@ -171,33 +171,93 @@
   width: 100%;
 }
 
-.jojo-xo {
+.jojo-xo-layer {
   position: fixed;
+  inset: 0;
   z-index: 999;
   pointer-events: none;
-  transform: translate(-50%, -50%);
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #e11d48;
-  text-shadow: 0 2px 8px rgba(225, 29, 72, 0.18);
-  animation: jojoPop 0.45s ease;
+  overflow: hidden;
 }
 
-.xo-1 { top: 18%; left: 22%; }
-.xo-2 { top: 18%; left: 50%; }
-.xo-3 { top: 18%; left: 78%; }
-.xo-4 { top: 32%; left: 34%; }
-.xo-5 { top: 32%; left: 66%; }
-.xo-6 { top: 46%; left: 50%; }
+.jojo-xo,
+.jojo-heart {
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  font-weight: 800;
+  text-shadow: 0 4px 14px rgba(225, 29, 72, 0.35);
+}
 
-@keyframes jojoPop {
+.jojo-xo {
+  font-size: 1.5rem;
+  color: #e11d48;
+  animation: jojoFloat 2.6s ease-in-out forwards;
+}
+
+.jojo-heart {
+  font-size: 1.4rem;
+  animation: jojoHeartSpin 2.6s ease-in-out forwards;
+}
+
+.xo-1 { top: 18%; left: 18%; animation-delay: 0s; }
+.xo-2 { top: 18%; left: 82%; animation-delay: 0.12s; }
+.xo-3 { top: 40%; left: 12%; animation-delay: 0.24s; }
+.xo-4 { top: 45%; left: 88%; animation-delay: 0.36s; }
+.xo-5 { top: 72%; left: 25%; animation-delay: 0.48s; }
+.xo-6 { top: 75%; left: 72%; animation-delay: 0.6s; }
+.xo-7 { top: 55%; left: 50%; animation-delay: 0.18s; }
+.xo-8 { top: 28%; left: 50%; animation-delay: 0.42s; }
+
+.heart-1 { top: 62%; left: 18%; animation-delay: 0.1s; }
+.heart-2 { top: 35%; left: 50%; animation-delay: 0.3s; }
+.heart-3 { top: 62%; left: 82%; animation-delay: 0.5s; }
+
+@keyframes jojoFloat {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.75);
+    transform: translate(-50%, -50%) scale(0.4) rotate(-20deg);
   }
-  100% {
+
+  20% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -85%) scale(1.25) rotate(10deg);
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(-50%, -130%) scale(1) rotate(-8deg);
+  }
+
+  75% {
+    opacity: 0.9;
+    transform: translate(-50%, -190%) scale(1.15) rotate(12deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -260%) scale(0.8) rotate(25deg);
+  }
+}
+
+@keyframes jojoHeartSpin {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -90%) scale(1.3) rotate(12deg);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate(-50%, -155%) scale(1) rotate(-14deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -250%) scale(0.7) rotate(35deg);
   }
 }
 
