@@ -41,7 +41,7 @@ export default function MapPage({ windyUrl, locationName, onBack }) {
         </span>
 
         <button className="mapPageMusicBtn" onClick={toggleXO}>
-          {isPlaying ? 'Pause XO 🎵' : 'Play XO 🎵'}
+          {isPlaying ? 'Pause XO ' : 'Play XO '}
         </button>
       </div>
 
