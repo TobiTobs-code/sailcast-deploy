@@ -24,9 +24,9 @@ function App() {
   const [showPopup, setShowPopup] = useState(false);
   const [hasAccepted, setHasAccepted] = useState(false);
 
-  // Load Portsmouth automatically on first load
+  // Load Białystok automatically on first load
   useEffect(() => {
-    handleSearch('Portsmouth');
+    handleSearch('Białystok');
   }, []);
 
   async function handleSearch(searchCity) {
@@ -99,7 +99,7 @@ function App() {
   }
 
   function handleHomePage() {
-    handleSearch('Portsmouth');
+    handleSearch('Białystok');
     setPage('dashboard');
   }
 
